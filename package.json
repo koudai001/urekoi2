@@ -1,0 +1,22 @@
+{
+  "name": "urekoi-auth",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "types": "wrangler types"
+  },
+  "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.7.3",
+    "better-auth": "^1.7.3",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "1.0.0-rc.4",
+    "hono": "^4.13.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "drizzle-kit": "1.0.0-rc.4",
+    "tsx": "^4.23.13",
+    "wrangler": "^4.129.0"
+  }
+}
