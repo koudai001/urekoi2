@@ -4,10 +4,12 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "types": "wrangler types"
+    "types": "wrangler types",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.3",
+    "@libsql/client": "^0.18.0",
     "better-auth": "^1.7.3",
     "dotenv": "^17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
