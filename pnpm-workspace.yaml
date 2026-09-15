@@ -1,6 +1,12 @@
+# Cloudflare Workers (Wrangler) のビルド・テスト実行に必要なパッケージの許可リスト
 onlyBuiltDependencies:
+  # バンドル
   - esbuild
+  # シュミレータ
   - workerd
 allowBuilds:
   esbuild: true
   workerd: true
+# Cloudflareでのビルドエラー回避のため、ルートディレクトリを明示
+packages:
+  - "./"
