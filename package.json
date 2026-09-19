@@ -1,5 +1,5 @@
 {
-  "name": "urekoi-auth",
+  "name": "urekoi-hono-api",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",

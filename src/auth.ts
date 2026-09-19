@@ -1,6 +1,5 @@
 import { env } from "cloudflare:workers";
 import { betterAuth } from "better-auth";
-import { jwt } from "better-auth/plugins";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { db } from "./db";
 import * as schema from "./db/schema";
@@ -13,16 +12,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  baseURL: env.AUTH_URL,
-  // フロントエンド(別オリジン)からのリクエストを許可
-  trustedOrigins: [env.APP_URL],
-  plugins: [
-    jwt({
-      jwt: {
-        // 認証サーバーが発行し、Go APIで利用するJWTとして設定する。
-        issuer: env.AUTH_URL,
-        audience: env.API_URL,
-      },
-    }),
-  ],
+  baseURL: env.API_URL,
+  trustedOrigins: [env.WEB_URL],
+  advanced: {
+    // ローカル開発時のみtrue
+    disableOriginCheck: process.env.NODE_ENV === "development",
+  },
 });
