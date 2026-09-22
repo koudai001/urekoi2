@@ -31,3 +31,6 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+
+# TanStack Router (auto-generated)
+routeTree.gen.ts

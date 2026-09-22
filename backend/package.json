@@ -1,5 +1,5 @@
 {
-  "name": "urekoi-auth",
+  "name": "urekoi2-backend",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",

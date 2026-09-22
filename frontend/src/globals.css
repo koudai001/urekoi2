@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --color-background: oklch(0.98 0.01 80);
+  --color-foreground: oklch(0.2 0.02 330);
+  --color-primary: oklch(0.6 0.2 338);
+  --color-muted-foreground: oklch(0.5 0.02 330);
+  --color-border: oklch(0.88 0.02 80);
+  --color-error: oklch(0.58 0.23 20);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground font-sans;
+  }
+}
