@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // 想定するjsの世代
+    "target": "ES2022",
+    // import/exportの形式 
+    "module": "ESNext",
+    // ファイルの探し方
+    "moduleResolution": "Bundler",
+    // JS標準（ES2022）とブラウザ標準API（DOM）の型定義を読み込む
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    // jsx = reactのコンポーネントとして認識させる
+    "jsx": "react-jsx",
+    // 型チェックの厳密さ
+    "strict": true,
+    // node_modulesの型定義を無視する
+    "skipLibCheck": true,
+    // コンパイルはviteが行うので、tscは出力しない
+    "noEmit": true,
+    // viteの機能の型定義を読み込む
+    "types": ["vite/client"]
+  },
+  // 監視対象
+  "include": ["src", "vite.config.ts"]
+}

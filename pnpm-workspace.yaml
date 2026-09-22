@@ -7,6 +7,6 @@ onlyBuiltDependencies:
 allowBuilds:
   esbuild: true
   workerd: true
-# Cloudflareでのビルドエラー回避のため、ルートディレクトリを明示
 packages:
-  - "./"
+  - "frontend"
+  - "backend"
