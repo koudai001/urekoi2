@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import type { SignupFormValues } from "../../routes/signup";
+import type { SignupFormValues } from "./use-signup";
 import { Button } from "../ui/button";
 import { BackHeader } from "../ui/back-header";
 

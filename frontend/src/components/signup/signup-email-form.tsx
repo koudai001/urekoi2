@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import type { SignupFormValues } from "../../routes/signup";
+import type { SignupFormValues } from "./use-signup";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { BackHeader } from "../ui/back-header";
@@ -43,9 +43,7 @@ export function SignupEmailForm({
               {...register("email")}
             />
             {errors.email && (
-              <p className="mt-2 text-sm text-error">
-                {errors.email.message}
-              </p>
+              <p className="mt-2 text-sm text-error">{errors.email.message}</p>
             )}
           </div>
 
