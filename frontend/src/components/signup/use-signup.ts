@@ -56,7 +56,8 @@ export function useSignup() {
 
       if (error) {
         console.error(error);
-        throw new Error("登録に失敗しました。時間をおいて再度お試しください");
+        // 翻訳済み
+        throw new Error(error.message);
       }
     },
     onSuccess: () => {

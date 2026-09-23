@@ -10,7 +10,10 @@ importers:
     dependencies:
       '@better-auth/drizzle-adapter':
         specifier: ^1.7.3
-        version: 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4)
+        version: 1.7.3(@better-auth/core@1.7.5)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4)
+      '@better-auth/i18n':
+        specifier: ^1.7.5
+        version: 1.7.5(@better-auth/core@1.7.5)(better-auth@1.7.3)
       '@libsql/client':
         specifier: ^0.18.0
         version: 0.18.0
@@ -276,6 +279,45 @@ packages:
       zod: 4.6.5
     dev: false
 
+  /@better-auth/core@1.7.5(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3):
+    resolution: {integrity: sha512-kVlSu4H8OKQfjg4b/Zj5MOaospt83N0JbX38wsDzE58Yw95jzovFkU3pxzB1eUFYc4mkuhUMZD8iT1gpUjNMcQ==}
+    peerDependencies:
+      '@better-auth/utils': 0.4.2
+      '@better-fetch/fetch': 1.3.2
+      '@opentelemetry/api': ^1.9.0
+      better-call: 1.4.0
+      jose: ^6.1.0
+      kysely: ^0.28.5 || ^0.29.0
+      nanostores: ^1.0.1
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+    dependencies:
+      '@better-auth/utils': 0.4.2
+      '@better-fetch/fetch': 1.3.2
+      '@opentelemetry/semantic-conventions': 1.43.0
+      '@standard-schema/spec': 1.1.0
+      better-call: 1.4.0(zod@4.6.5)
+      jose: 6.2.12
+      kysely: 0.29.5
+      nanostores: 1.5.3
+      zod: 4.6.5
+    dev: false
+
+  /@better-auth/drizzle-adapter@1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2):
+    resolution: {integrity: sha512-S+nQRlxbUhkR43LrSv8c98ZvOvmv3nrtOnHkiZXkdDkr60PWp7maC2cqgzZ2C9exCC1a+4TugJlx2jRL+r+/9A==}
+    peerDependencies:
+      '@better-auth/core': ^1.7.3
+      '@better-auth/utils': 0.4.2
+      drizzle-orm: ^0.45.2 || >=1.0.0-rc.1 <2.0.0
+    peerDependenciesMeta:
+      drizzle-orm:
+        optional: true
+    dependencies:
+      '@better-auth/core': 1.7.3(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
+      '@better-auth/utils': 0.4.2
+    dev: false
+
   /@better-auth/drizzle-adapter@1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4):
     resolution: {integrity: sha512-S+nQRlxbUhkR43LrSv8c98ZvOvmv3nrtOnHkiZXkdDkr60PWp7maC2cqgzZ2C9exCC1a+4TugJlx2jRL+r+/9A==}
     peerDependencies:
@@ -289,6 +331,31 @@ packages:
       '@better-auth/core': 1.7.3(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
       '@better-auth/utils': 0.4.2
       drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)
+    dev: false
+
+  /@better-auth/drizzle-adapter@1.7.3(@better-auth/core@1.7.5)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4):
+    resolution: {integrity: sha512-S+nQRlxbUhkR43LrSv8c98ZvOvmv3nrtOnHkiZXkdDkr60PWp7maC2cqgzZ2C9exCC1a+4TugJlx2jRL+r+/9A==}
+    peerDependencies:
+      '@better-auth/core': ^1.7.3
+      '@better-auth/utils': 0.4.2
+      drizzle-orm: ^0.45.2 || >=1.0.0-rc.1 <2.0.0
+    peerDependenciesMeta:
+      drizzle-orm:
+        optional: true
+    dependencies:
+      '@better-auth/core': 1.7.5(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
+      '@better-auth/utils': 0.4.2
+      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)
+    dev: false
+
+  /@better-auth/i18n@1.7.5(@better-auth/core@1.7.5)(better-auth@1.7.3):
+    resolution: {integrity: sha512-1SqORv8jTFLJZRgDYVXJwk1Nz+GPwSWXtp9O5D+0BtxxQFD7cqg+4PDDJB6t2FyB6rfRonyxZMP4fme8jOTmAw==}
+    peerDependencies:
+      '@better-auth/core': ^1.7.5
+      better-auth: ^1.7.5
+    dependencies:
+      '@better-auth/core': 1.7.5(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
+      better-auth: 1.7.3(react-dom@19.3.0)(react@19.3.0)
     dev: false
 
   /@better-auth/kysely-adapter@1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)(kysely@0.29.5):
@@ -373,6 +440,10 @@ packages:
 
   /@better-fetch/fetch@1.3.1:
     resolution: {integrity: sha512-ABkD1WhyfPZprKRQI3bhATjeiFuNWC9PXhfGWqL+sg/gKrM977oFrYkdb4msM3hgUGonr7KlOsOFT5TU2rht9g==}
+    dev: false
+
+  /@better-fetch/fetch@1.3.2:
+    resolution: {integrity: sha512-Gs7n99b5tqUC6cQAPbV0uED3IraHB6xQbHLQ/C3l7ZFafHScOx9pQ+DYmP5blbLFShVWLqxNUlI9wi4xU/X+ow==}
     dev: false
 
   /@cloudflare/kv-asset-handler@0.5.0:
@@ -2268,7 +2339,7 @@ packages:
         optional: true
     dependencies:
       '@better-auth/core': 1.7.3(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.1)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
-      '@better-auth/drizzle-adapter': 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4)
+      '@better-auth/drizzle-adapter': 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)
       '@better-auth/kysely-adapter': 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)(kysely@0.29.5)
       '@better-auth/memory-adapter': 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)
       '@better-auth/mongo-adapter': 1.7.3(@better-auth/core@1.7.3)(@better-auth/utils@0.4.2)

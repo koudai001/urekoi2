@@ -22,7 +22,7 @@ export function useLogin() {
 
       if (error) {
         console.error(error);
-        throw new Error("メールアドレスまたはパスワードが正しくありません");
+        throw new Error(error.message);
       }
     },
     onSuccess: () => {
