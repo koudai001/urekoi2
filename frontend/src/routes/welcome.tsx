@@ -29,13 +29,12 @@ function Welcome() {
         >
           新しくはじめる（無料）
         </Link>
-        {/* TODO: /login ルート作成後に <Link to="/login"> へ差し替える */}
-        <a
-          href="/login"
+        <Link
+          to="/login"
           className="flex h-16 items-center justify-center rounded-xl border border-border text-lg font-semibold"
         >
           すでに登録されている方はこちら
-        </a>
+        </Link>
 
         <p className="pt-3 text-center text-xs text-muted-foreground">
           <span className="underline underline-offset-2">利用規約</span>、
