@@ -32,7 +32,7 @@ function Login() {
 
   return (
     <>
-      <BackHeader href="/welcome" title="熟恋にログイン" />
+      <BackHeader href="/" title="熟恋にログイン" />
       <div className="px-8 pt-6">
         <h1 className="text-2xl font-bold">メールアドレスでログイン</h1>
         <p className="mt-4 text-base leading-7">

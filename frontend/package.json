@@ -16,6 +16,7 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-hook-form": "^7.88.0",
+    "urekoi2-shared": "workspace:*",
     "zod": "^4.6.5"
   },
   "devDependencies": {

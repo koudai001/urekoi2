@@ -10,7 +10,7 @@ export function SignupLanding({
 }) {
   return (
     <main>
-      <BackHeader href="/welcome" title="熟恋に新規登録" />
+      <BackHeader href="/" title="熟恋に新規登録" />
 
       <div className="flex flex-col gap-3 px-8 pt-6">
         <Button type="button" onClick={onSelectEmail} variant="outline">

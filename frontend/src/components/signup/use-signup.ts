@@ -61,8 +61,7 @@ export function useSignup() {
       }
     },
     onSuccess: () => {
-      // TODO: プロフィール入力画面ができたらそちらへ遷移する
-      navigate({ to: "/welcome" });
+      navigate({ to: "/signup/profile" });
     },
   });
 }
