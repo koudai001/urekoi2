@@ -125,9 +125,3 @@ export const authRelations = defineRelationsPart(
     },
   }),
 );
-
-// 都道府県マスタ(JIS X 0401コード 1〜47)
-export const prefecture = sqliteTable("prefecture", {
-  code: integer("code").primaryKey(),
-  name: text("name").notNull(),
-});

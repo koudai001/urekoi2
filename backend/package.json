@@ -11,12 +11,14 @@
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.3",
     "@better-auth/i18n": "^1.7.5",
+    "@hono/zod-validator": "^0.9.1",
     "@libsql/client": "^0.18.0",
     "better-auth": "^1.7.5",
     "dotenv": "^17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
     "hono": "^4.13.7",
-    "urekoi2-shared": "workspace:*"
+    "urekoi2-shared": "workspace:*",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",

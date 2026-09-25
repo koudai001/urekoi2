@@ -4,7 +4,7 @@ import { defineConfig } from "drizzle-kit";
 export default defineConfig({
   // SQLマイグレーションファイルとスナップショットの出力先ディレクトリ
   out: "./drizzle",
-  schema: "./src/db/schema.ts",
+  schema: "./src/db/schema/index.ts",
   // tursoベース
   dialect: "turso",
   dbCredentials: {

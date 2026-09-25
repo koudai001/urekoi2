@@ -14,6 +14,9 @@ importers:
       '@better-auth/i18n':
         specifier: ^1.7.5
         version: 1.7.5(@better-auth/core@1.7.5)(better-auth@1.7.5)
+      '@hono/zod-validator':
+        specifier: ^0.9.1
+        version: 0.9.1(hono@4.13.7)(zod@4.6.5)
       '@libsql/client':
         specifier: ^0.18.0
         version: 0.18.0
@@ -25,13 +28,16 @@ importers:
         version: 17.4.2
       drizzle-orm:
         specifier: 1.0.0-rc.4
-        version: 1.0.0-rc.4(@libsql/client@0.18.0)
+        version: 1.0.0-rc.4(@libsql/client@0.18.0)(zod@4.6.5)
       hono:
         specifier: ^4.13.7
         version: 4.13.7
       urekoi2-shared:
         specifier: workspace:*
         version: link:../shared
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
     devDependencies:
       '@types/node':
         specifier: ^26.4.1
@@ -338,7 +344,7 @@ packages:
     dependencies:
       '@better-auth/core': 1.7.5(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
       '@better-auth/utils': 0.4.2
-      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)
+      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)(zod@4.6.5)
     dev: false
 
   /@better-auth/drizzle-adapter@1.7.5(@better-auth/core@1.7.5)(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4):
@@ -353,7 +359,7 @@ packages:
     dependencies:
       '@better-auth/core': 1.7.5(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0)(jose@6.2.12)(kysely@0.29.5)(nanostores@1.5.3)
       '@better-auth/utils': 0.4.2
-      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)
+      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)(zod@4.6.5)
     dev: false
 
   /@better-auth/i18n@1.7.5(@better-auth/core@1.7.5)(better-auth@1.7.5):
@@ -1044,6 +1050,16 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@hono/zod-validator@0.9.1(hono@4.13.7)(zod@4.6.5):
+    resolution: {integrity: sha512-iiv6w0qrIc0arfvCtUqBWsvl4fXjzaTcQcCJTTtCnkawF9HHGE+KjEl0ox3gQJ6rKZEgE3mLExlQCF72M+mNuw==}
+    peerDependencies:
+      hono: '>=4.11.2'
+      zod: ^3.25.0 || ^4.0.0
+    dependencies:
+      hono: 4.13.7
+      zod: 4.6.5
+    dev: false
 
   /@hookform/resolvers@5.9.1(react-hook-form@7.88.0)(zod@4.6.5):
     resolution: {integrity: sha512-7b7vsbraJxKgjVSA1Nur9tLwj539WGJUBLA7QNvXnFoT2pM5Z7G+6rlukk4B2/QrTZy6huRtH6wKeESPKuIr6w==}
@@ -2425,7 +2441,7 @@ packages:
       better-call: 1.4.0(zod@4.6.5)
       defu: 6.1.7
       drizzle-kit: 1.0.0-rc.4
-      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)
+      drizzle-orm: 1.0.0-rc.4(@libsql/client@0.18.0)(zod@4.6.5)
       jose: 6.2.12
       kysely: 0.29.5
       nanostores: 1.5.3
@@ -2538,7 +2554,7 @@ packages:
       get-tsconfig: 4.14.3
       jiti: 2.7.0
 
-  /drizzle-orm@1.0.0-rc.4(@libsql/client@0.18.0):
+  /drizzle-orm@1.0.0-rc.4(@libsql/client@0.18.0)(zod@4.6.5):
     resolution: {integrity: sha512-BT+pf+qoiYHqltoA88Jmf6ilGMXPlpfE0hEJKc2adRtMCAl25Swk/t5gXcWxZNAwdtf3F5gCd2FpeOyP/pT0Hw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -2685,6 +2701,7 @@ packages:
         optional: true
     dependencies:
       '@libsql/client': 0.18.0
+      zod: 4.6.5
     dev: false
 
   /electron-to-chromium@1.5.433:
