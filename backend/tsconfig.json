@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node"],
+    "types": ["node", "@cloudflare/vitest-plugin/types"],
     "strict": true,
     "skipLibCheck": true,
     "lib": [

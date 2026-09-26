@@ -1,8 +1,9 @@
 ## 技術構成(monorepo)
 
-- frontend: Vite / React / TanStack Router / react-hook-form
-- backend: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL) / better-auth
-- infra: frontend(静的配信)とbackend(API)を1つのWorkerで両方捌く(同一オリジン)
+- 方針: パフォーマンス最優先
+- frontend（SPAの静的配信）: React / TanStack Router / TanStack Query / react-hook-form
+- backend（API）: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
+- infra: Cloudflare Workers（同一オリジン）
 - shared: frontend/backend共通の定数・型
 
 ## backend構成(レイヤードアーキテクチャ)
