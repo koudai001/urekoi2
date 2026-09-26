@@ -1,0 +1,43 @@
+import { useFormContext } from "react-hook-form";
+import { BackHeader } from "../../ui/back-header";
+import { SignupProgressBar } from "./signup-progress-bar";
+import { SignupNextButton } from "./signup-next-button";
+import type { ProfileFormValues } from "./profile-schema";
+
+// 表示名(ニックネーム)入力
+export function SignupNickname({
+  onBack,
+  onNext,
+}: {
+  onBack: () => void;
+  onNext: () => void;
+}) {
+  const { register, watch } = useFormContext<ProfileFormValues>();
+  const canProceed = watch("nickname").trim().length > 0;
+
+  return (
+    <>
+      <BackHeader onBack={onBack} />
+      <div className="px-8 pt-6">
+        <SignupProgressBar currentStep={4} totalSteps={4} />
+
+        <h1 className="mt-8 text-2xl font-bold">表示名を決めましょう</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          あとから変更できます
+        </p>
+
+        <div className="mt-8">
+          <input
+            type="text"
+            maxLength={20}
+            placeholder="表示名を入力してください"
+            {...register("nickname")}
+            className="w-full border-none border-b-2 border-primary bg-transparent px-0.5 pt-1 pb-3 text-[19px] outline-none placeholder:text-muted-foreground"
+          />
+        </div>
+
+        <SignupNextButton onNext={onNext} disabled={!canProceed} />
+      </div>
+    </>
+  );
+}

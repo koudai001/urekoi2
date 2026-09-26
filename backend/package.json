@@ -5,21 +5,30 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
     "types": "wrangler types",
-    "db:push": "drizzle-kit push"
+    "test": "vitest run",
+    "db:push": "drizzle-kit push",
+    "db:push:test": "drizzle-kit push --config drizzle.test.config.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:seed:test": "DOTENV_CONFIG_PATH=.env.test DOTENV_OVERRIDE=true pnpm tsx src/db/seed.ts"
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.3",
     "@better-auth/i18n": "^1.7.5",
+    "@hono/zod-validator": "^0.9.1",
     "@libsql/client": "^0.18.0",
-    "better-auth": "^1.7.3",
+    "better-auth": "^1.7.5",
     "dotenv": "^17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
-    "hono": "^4.13.7"
+    "hono": "^4.13.7",
+    "urekoi2-shared": "workspace:*",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.2.8",
     "@types/node": "^26.4.1",
     "drizzle-kit": "1.0.0-rc.4",
     "tsx": "^4.23.13",
+    "vitest": "^4.1.0",
     "wrangler": "^4.129.0"
   }
 }

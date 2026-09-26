@@ -1,11 +1,11 @@
-import "dotenv/config";
+import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
+config({ path: ".env.test", override: true });
+
 export default defineConfig({
-  // SQLマイグレーションファイルとスナップショットの出力先ディレクトリ
   out: "./drizzle",
   schema: "./src/db/schema/index.ts",
-  // tursoベース
   dialect: "turso",
   dbCredentials: {
     url: process.env.TURSO_DATABASE_URL!,
