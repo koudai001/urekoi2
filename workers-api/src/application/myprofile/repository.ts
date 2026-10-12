@@ -1,6 +1,6 @@
 import { db } from "../../db";
 import { profile } from "../../db/schema";
-import type { CreateProfileInput } from "./schema";
+import type { CreateProfileInput } from "../../api/myprofile/schema";
 
 type ProfileRow = typeof profile.$inferSelect;
 

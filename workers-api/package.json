@@ -1,5 +1,5 @@
 {
-  "name": "urekoi2-backend",
+  "name": "workers-api",
   "type": "module",
   "types": "./src/index.tsx",
   "scripts": {

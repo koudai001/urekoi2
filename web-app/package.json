@@ -1,5 +1,5 @@
 {
-  "name": "urekoi2-frontend",
+  "name": "web-app",
   "private": true,
   "type": "module",
   "scripts": {
@@ -27,7 +27,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
     "tailwindcss": "^4.3.3",
-    "urekoi2-backend": "workspace:*",
+    "urekoi2-workers-api": "workspace:*",
     "typescript": "^7.0.2",
     "vite": "^8.3.0"
   }

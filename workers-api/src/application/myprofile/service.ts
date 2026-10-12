@@ -1,5 +1,5 @@
 import { myProfileRepository } from "./repository";
-import type { CreateProfileInput } from "./schema";
+import type { CreateProfileInput } from "../../api/myprofile/schema";
 
 export const myProfileService = {
   createProfile,

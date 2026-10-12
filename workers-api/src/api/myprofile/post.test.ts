@@ -2,12 +2,12 @@ import { testClient } from "hono/testing";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { auth } from "../../lib/auth";
 import { routes } from "../../index";
-import { setCurrentUserId } from "../../middlewares/require-auth.mock";
+import { setCurrentUserId } from "../../middleware/require-auth.mock";
 
 // ミドルウェアのモック
 vi.mock(
-  "../../middlewares/require-auth",
-  () => import("../../middlewares/require-auth.mock"),
+  "../../middleware/require-auth",
+  () => import("../../middleware/require-auth.mock"),
 );
 
 let userId: string;
