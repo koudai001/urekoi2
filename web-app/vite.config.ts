@@ -15,5 +15,9 @@ export default defineConfig({
     tailwindcss(),
   ],
   // 開発サーバーの設定（本番では使用しない）本番では、Workerが/api/* をHonoに、それ以外をSPAに振り分け
-  server: { proxy: { "/api": "http://localhost:8787" } },
+  server: {
+    port: 5300,
+    strictPort: true,
+    proxy: { "/api": "http://localhost:8800" },
+  },
 });
