@@ -1,10 +1,9 @@
-import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
+import { createRoute, type RouteHandler } from "@hono/zod-openapi";
 import { setCookie } from "hono/cookie";
-import { requireAuth } from "../../middlewares/require-auth";
+import { myProfileService } from "../../application/myprofile/service";
 import { createProfileSchema, profileResponseSchema } from "./schema";
-import { myProfileService } from "./service";
 
-const createProfileRoute = createRoute({
+export const route = createRoute({
   method: "post",
   path: "/",
   request: {
@@ -22,14 +21,10 @@ const createProfileRoute = createRoute({
   },
 });
 
-const app = new OpenAPIHono<{
-  Bindings: Env;
-  Variables: { userId: string };
-}>();
-
-app.use(requireAuth);
-
-export const myprofile = app.openapi(createProfileRoute, async (c) => {
+export const handler: RouteHandler<
+  typeof route,
+  { Bindings: Env; Variables: { userId: string } }
+> = async (c) => {
   const userId = c.get("userId");
   const data = c.req.valid("json");
 
@@ -51,4 +46,4 @@ export const myprofile = app.openapi(createProfileRoute, async (c) => {
   });
 
   return c.json(created, 201);
-});
+};

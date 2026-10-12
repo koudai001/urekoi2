@@ -1,22 +1,25 @@
 ## 技術構成(monorepo)
-- frontend（SPAの静的配信）: React / TanStack Router / TanStack Query / react-hook-form
-- backend（API）: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
+- web-app（SPAの静的配信）: React / TanStack Router / TanStack Query / react-hook-form
+- workers-api（API）: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
 - infra: Cloudflare Workers（同一オリジン）
-- shared: frontend/backend共通の定数・型
+- shared: web-app/workers-api共通の定数・型
 
-## backend構成(レイヤードアーキテクチャ)
+## workers-api構成(レイヤードアーキテクチャ)
 
 ```
-features/<name>/
-  index.ts      HTTP層
-  service.ts    業務ロジック
-  repository.ts DBアクセス
-  schema.ts     zod
+api/<name>/          HTTP層
+  index.ts           ルートの登録（共通ミドルウェアもここ）
+  post.ts など       1エンドポイント1ファイル（route と handler）
+  post.test.ts など  エンドポイントのテスト
+  schema.ts          zod（リクエスト・レスポンスの形）
 
-lib/          共通処理
-middlewares/  共通ミドルウェア
-db/schema/    1テーブル1ファイル
+application/<name>/
+  service.ts         業務ロジック
+  repository.ts      DBアクセス
 
+lib/                 共通処理
+middleware/          共通ミドルウェア
+db/schema/           1テーブル1ファイル
 ```
 
 ## 認証

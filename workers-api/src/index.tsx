@@ -1,6 +1,6 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { auth } from "./lib/auth";
-import { myprofile } from "./features/myprofile";
+import { myprofile } from "./api/myprofile";
 import { swaggerUI } from "@hono/swagger-ui";
 
 const app = new OpenAPIHono<{ Bindings: Env }>();
