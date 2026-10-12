@@ -1,26 +1,27 @@
 import { useFormContext } from "react-hook-form";
-import type { SignupFormValues } from "./use-signup";
+import { useNavigate } from "@tanstack/react-router";
+import { useSignup, type SignupFormValues } from "./use-signup";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { BackHeader } from "../ui/back-header";
 
 // メールアドレス・パスワードを入力して送信する
-export function SignupEmailForm({
-  isPending,
-  errorMessage,
-  onBack,
-  onSubmit,
-}: {
-  isPending: boolean;
-  errorMessage: string | null;
-  onBack: () => void;
-  onSubmit: (data: SignupFormValues) => void;
-}) {
+export function SignupEmailForm({ onBack }: { onBack: () => void }) {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useFormContext<SignupFormValues>();
+
+  const signup = useSignup();
+
+  const onSubmit = handleSubmit((data) => {
+    signup.mutate(data, {
+      onSuccess: () => navigate({ to: "/signup/profile" }),
+    });
+  });
 
   return (
     <>
@@ -31,10 +32,7 @@ export function SignupEmailForm({
           メールアドレスとパスワードを入力してください。
         </p>
 
-        <form
-          className="mt-20 flex flex-col gap-8"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="mt-20 flex flex-col gap-8" onSubmit={onSubmit}>
           <div>
             <Input
               type="email"
@@ -65,13 +63,15 @@ export function SignupEmailForm({
             アカウント登録すると、利用規約・プライバシーポリシー・コミュニティガイドラインに同意したこととみなします。
           </p>
 
-          {errorMessage && (
-            <p className="text-sm font-medium text-error">{errorMessage}</p>
+          {signup.isError && (
+            <p className="text-sm font-medium text-error">
+              {signup.error.message}
+            </p>
           )}
 
           <div className="mt-8">
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "登録中..." : "登録する"}
+            <Button type="submit" disabled={signup.isPending}>
+              {signup.isPending ? "登録中..." : "登録する"}
             </Button>
           </div>
         </form>

@@ -1,7 +1,7 @@
 import { testClient } from "hono/testing";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { auth } from "../../lib/auth";
-import app from "../../index";
+import { routes } from "../../index";
 import { setCurrentUserId } from "../../middlewares/require-auth.mock";
 
 // ミドルウェアのモック
@@ -32,7 +32,7 @@ const validBody = {
   prefectureCode: 13,
 };
 
-const client = testClient(app);
+const client = testClient(routes);
 
 describe("POST /api/myprofile", () => {
   test("異常：バリデーション不正で400", async () => {

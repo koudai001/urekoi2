@@ -14,6 +14,9 @@ importers:
       '@better-auth/i18n':
         specifier: ^1.7.5
         version: 1.7.5(@better-auth/core@1.7.5)(better-auth@1.7.5)
+      '@hono/swagger-ui':
+        specifier: ^0.6.1
+        version: 0.6.1(hono@4.13.7)
       '@hono/zod-openapi':
         specifier: ^1.6.3
         version: 1.6.3(hono@4.13.7)(zod@4.6.5)
@@ -1131,6 +1134,14 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@hono/swagger-ui@0.6.1(hono@4.13.7):
+    resolution: {integrity: sha512-sJTvldu1GPeEPfyeLG7gRj+W4vEuD+JDi+JjJ3TJs/DvMUtBLs0KJO5yokGegWWdy5qrbdnQGekbhgNRmPmYKQ==}
+    peerDependencies:
+      hono: '>=4.0.0'
+    dependencies:
+      hono: 4.13.7
+    dev: false
 
   /@hono/zod-openapi@1.6.3(hono@4.13.7)(zod@4.6.5):
     resolution: {integrity: sha512-VYR82Y60plu8g3pN60OUXMVKpmxh3R04Qs++3DY9vtwZ9/sA/BRY0PcRIR+Z37/3itWtM7pYwT9bKiH9JhqV6Q==}
