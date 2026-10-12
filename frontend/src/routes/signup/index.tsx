@@ -6,7 +6,6 @@ import { SignupLanding } from "../../components/signup/signup-landing";
 import { SignupConsent } from "../../components/signup/signup-consent";
 import { SignupEmailForm } from "../../components/signup/signup-email-form";
 import {
-  useSignup,
   signupSchema,
   type SignupFormValues,
 } from "../../components/signup/use-signup";
@@ -30,8 +29,6 @@ function Signup() {
     },
   });
 
-  const signup = useSignup();
-
   if (step === "select") {
     return <SignupLanding onSelectEmail={() => setStep("consent")} />;
   }
@@ -44,12 +41,7 @@ function Signup() {
           onNext={() => setStep("email")}
         />
       ) : (
-        <SignupEmailForm
-          isPending={signup.isPending}
-          errorMessage={signup.isError ? signup.error.message : null}
-          onBack={() => setStep("consent")}
-          onSubmit={(data) => signup.mutate(data)}
-        />
+        <SignupEmailForm onBack={() => setStep("consent")} />
       )}
     </FormProvider>
   );

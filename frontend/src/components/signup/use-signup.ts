@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { authClient } from "../../lib/auth-client";
 
@@ -44,8 +43,6 @@ export const signupSchema = z
 export type SignupFormValues = z.infer<typeof signupSchema>;
 
 export function useSignup() {
-  const navigate = useNavigate();
-
   return useMutation({
     mutationFn: async (data: SignupFormValues) => {
       const { error } = await authClient.signUp.email({
@@ -59,9 +56,6 @@ export function useSignup() {
         // 翻訳済み
         throw new Error(error.message);
       }
-    },
-    onSuccess: () => {
-      navigate({ to: "/signup/profile" });
     },
   });
 }

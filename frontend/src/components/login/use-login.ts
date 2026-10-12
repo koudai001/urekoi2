@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { authClient } from "../../lib/auth-client";
 
@@ -11,8 +10,6 @@ export const loginSchema = z.object({
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function useLogin() {
-  const navigate = useNavigate();
-
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
       const { error } = await authClient.signIn.email({
@@ -24,10 +21,6 @@ export function useLogin() {
         console.error(error);
         throw new Error(error.message);
       }
-    },
-    onSuccess: () => {
-      // TODO: ホーム画面ができたらそちらへ遷移する
-      navigate({ to: "/" });
     },
   });
 }

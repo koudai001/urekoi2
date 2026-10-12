@@ -67,7 +67,7 @@ function SignupProfile() {
       return;
     }
 
-    navigate({ to: "/" });
+    navigate({ to: "/search" });
   };
 
   return (
