@@ -8,6 +8,5 @@ allowBuilds:
   esbuild: true
   workerd: true
 packages:
-  - "web-app"
-  - "workers-api"
-  - "shared"
+  - "apps/*"
+  - "packages/*"

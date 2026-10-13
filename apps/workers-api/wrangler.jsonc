@@ -1,0 +1,20 @@
+{
+  "name": "urekoi2",
+  "main": "src/index.tsx",
+  "compatibility_date": "2026-09-06",
+  // nodemailer（ローカルの Mailpit への送信）が Node の net / tls などを使うため
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "../web-app/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "previews": {},
+  // 他プロジェクトと被らないようポート固定
+  "dev": {
+    "port": 8800
+  }
+}

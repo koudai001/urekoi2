@@ -1,8 +1,14 @@
 ## 技術構成(monorepo)
-- web-app（SPAの静的配信）: React / TanStack Router / TanStack Query / react-hook-form
-- workers-api（API）: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
+
+```
+apps/
+  web-app/       SPAの静的配信: React / TanStack Router / TanStack Query / react-hook-form
+  workers-api/   API: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
+packages/
+  core/          web-app/workers-api共通の定数・型
+```
+
 - infra: Cloudflare Workers（同一オリジン）
-- shared: web-app/workers-api共通の定数・型
 
 ## workers-api構成(レイヤードアーキテクチャ)
 
@@ -25,6 +31,7 @@ db/schema/           1テーブル1ファイル
 ## 認証
 
 - better-authを使用
+- パスワードレス（Email OTP）。メールに届いた6桁のコードでログインし、未登録のアドレスならそのまま登録される
 - ミドルウェアがリクエストごとにセッションを確認し、無ければ401
 - 認証OKなら`userId`をセットして後続のハンドラに渡す
 
