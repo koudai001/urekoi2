@@ -5,17 +5,13 @@ import { useNavigate } from "@tanstack/react-router";
 import { BackHeader } from "../ui/BackHeader";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import {
-  useLogin,
-  useSendOtp,
-  emailSchema,
-  otpSchema,
-  type EmailFormValues,
-  type OtpFormValues,
-} from "./use-login";
+import { OtpStep } from "./OtpStep";
+import { useSendOtp, emailSchema, type EmailFormValues } from "./use-login";
 
 // メールアドレスにログインコードを送り、届いたコードでログインする
 export function LoginEmailForm({ onBack }: { onBack: () => void }) {
+  const navigate = useNavigate();
+
   // コード送信済みのメールアドレス。null の間はメールアドレス入力を表示する
   const [sentEmail, setSentEmail] = useState<string | null>(null);
 
@@ -29,7 +25,11 @@ export function LoginEmailForm({ onBack }: { onBack: () => void }) {
         {sentEmail === null ? (
           <EmailStep onSent={setSentEmail} />
         ) : (
-          <OtpStep email={sentEmail} />
+          <OtpStep
+            email={sentEmail}
+            submitLabel="ログインする"
+            onSuccess={() => navigate({ to: "/search" })}
+          />
         )}
       </div>
     </>
@@ -81,66 +81,6 @@ function EmailStep({ onSent }: { onSent: (email: string) => void }) {
         <div>
           <Button type="submit" disabled={sendOtp.isPending}>
             {sendOtp.isPending ? "送信中..." : "コードを送る"}
-          </Button>
-        </div>
-      </form>
-    </>
-  );
-}
-
-function OtpStep({ email }: { email: string }) {
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<OtpFormValues>({
-    resolver: zodResolver(otpSchema),
-    defaultValues: { otp: "" },
-  });
-
-  const login = useLogin();
-
-  const onSubmit = handleSubmit(({ otp }) => {
-    login.mutate(
-      { email, otp },
-      {
-        onSuccess: () => navigate({ to: "/search" }),
-      },
-    );
-  });
-
-  return (
-    <>
-      <h1 className="text-2xl font-bold">認証コードを入力してください</h1>
-      <p className="mt-4 text-base leading-7">
-        {email} にお送りした6桁のコードを入力してください。
-      </p>
-
-      <form className="mt-8 flex flex-col gap-6" onSubmit={onSubmit}>
-        <div>
-          <Input
-            inputMode="numeric"
-            autoComplete="one-time-code"
-            maxLength={6}
-            placeholder="6桁のコード"
-            {...register("otp")}
-          />
-          {errors.otp && (
-            <p className="mt-2 text-sm text-error">{errors.otp.message}</p>
-          )}
-        </div>
-
-        {login.isError && (
-          <p className="text-sm font-medium text-error">
-            {login.error.message}
-          </p>
-        )}
-
-        <div>
-          <Button type="submit" disabled={login.isPending}>
-            {login.isPending ? "ログイン中..." : "ログインする"}
           </Button>
         </div>
       </form>

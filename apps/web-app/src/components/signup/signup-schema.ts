@@ -1,13 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
-import { authClient } from "../../lib/auth-client";
 
 export const signupSchema = z
   .object({
     isAdult: z.boolean(),
     agreeTerms: z.boolean(),
     email: z.string(),
-    password: z.string(),
   })
   .superRefine((data, ctx) => {
     if (!data.isAdult) {
@@ -31,31 +28,6 @@ export const signupSchema = z
         path: ["email"],
       });
     }
-    if (data.password.length < 8) {
-      ctx.addIssue({
-        code: "custom",
-        message: "パスワードは8文字以上で入力してください",
-        path: ["password"],
-      });
-    }
   });
 
 export type SignupFormValues = z.infer<typeof signupSchema>;
-
-export function useSignup() {
-  return useMutation({
-    mutationFn: async (data: SignupFormValues) => {
-      const { error } = await authClient.signUp.email({
-        email: data.email,
-        password: data.password,
-        name: data.email,
-      });
-
-      if (error) {
-        console.error(error);
-        // 翻訳済み
-        throw new Error(error.message);
-      }
-    },
-  });
-}

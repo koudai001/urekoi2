@@ -21,14 +21,11 @@ export const auth = betterAuth({
       async sendVerificationOTP({ email, otp }) {
         const result = await sendEmail(emailConfig, {
           to: email,
-          subject: "ログインコード",
+          subject: "認証コード",
           react: OtpEmail({ otp }),
         });
         if (!result.success) {
-          console.error(
-            "ログインコードのメール送信に失敗しました",
-            result.error,
-          );
+          console.error("認証コードのメール送信に失敗しました", result.error);
           throw new Error(result.error.message);
         }
       },

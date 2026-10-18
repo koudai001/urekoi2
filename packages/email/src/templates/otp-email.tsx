@@ -11,10 +11,10 @@ export function OtpEmail({ otp }: OtpEmailProps): ReactElement {
   return (
     <Html lang="ja">
       {/* メール一覧で件名の横に出る1行 */}
-      <Preview>ログインコード: {otp}</Preview>
+      <Preview>認証コード: {otp}</Preview>
       <Body style={body}>
         <Container style={container}>
-          <Heading style={heading}>ログインコード</Heading>
+          <Heading style={heading}>認証コード</Heading>
           <Text style={text}>以下のコードをアプリに入力してください。</Text>
           <Text style={code}>{otp}</Text>
           <Text style={note}>

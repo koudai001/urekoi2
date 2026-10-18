@@ -14,14 +14,12 @@ let userId: string;
 
 // userを作成して、requireAuthミドルウェアのモックにセットする
 beforeEach(async () => {
-  const result = await auth.api.signUpEmail({
-    body: {
-      name: "テストユーザー",
-      email: `test-${crypto.randomUUID()}@test.example.com`,
-      password: "Password123!",
-    },
+  const ctx = await auth.$context;
+  const user = await ctx.internalAdapter.createUser({
+    name: "テストユーザー",
+    email: `test-${crypto.randomUUID()}@test.example.com`,
   });
-  userId = result.user.id;
+  userId = user.id;
   setCurrentUserId(userId);
 });
 

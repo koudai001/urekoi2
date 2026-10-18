@@ -8,7 +8,7 @@ import { SignupEmailForm } from "../../components/signup/SignupEmailForm";
 import {
   signupSchema,
   type SignupFormValues,
-} from "../../components/signup/use-signup";
+} from "../../components/signup/signup-schema";
 
 export const Route = createFileRoute("/signup/")({
   component: Signup,
@@ -25,7 +25,6 @@ function Signup() {
       isAdult: false,
       agreeTerms: false,
       email: "",
-      password: "",
     },
   });
 

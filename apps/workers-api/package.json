@@ -4,6 +4,7 @@
   "types": "./src/index.tsx",
   "scripts": {
     "dev": "wrangler dev",
+    "mailpit": "pnpm --filter @urekoi/email mailpit",
     "typecheck": "tsc",
     "deploy": "wrangler deploy --minify",
     "cf-typegen": "wrangler types",
