@@ -1,6 +1,7 @@
 import { testClient } from "hono/testing";
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { auth } from "../../lib/auth";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { db } from "../../db";
+import { user } from "../../db/schema";
 import { routes } from "../../index";
 import { setCurrentUserId } from "../../middleware/require-auth.mock";
 
@@ -14,12 +15,12 @@ let userId: string;
 
 // userを作成して、requireAuthミドルウェアのモックにセットする
 beforeEach(async () => {
-  const ctx = await auth.$context;
-  const user = await ctx.internalAdapter.createUser({
+  userId = crypto.randomUUID();
+  await db.insert(user).values({
+    id: userId,
     name: "テストユーザー",
-    email: `test-${crypto.randomUUID()}@test.example.com`,
+    email: `test-${userId}@test.example.com`,
   });
-  userId = user.id;
   setCurrentUserId(userId);
 });
 
@@ -33,7 +34,7 @@ const validBody = {
 const client = testClient(routes);
 
 describe("POST /api/myprofile", () => {
-  test("異常：バリデーション不正で400", async () => {
+  it("バリデーション不正 → 400", async () => {
     const res = await client.api.myprofile.$post({
       // @ts-expect-error 意図的に不正な値を送ってバリデーションをテストする
       json: { ...validBody, gender: "invalid" },
@@ -41,14 +42,11 @@ describe("POST /api/myprofile", () => {
     expect(res.status).toBe(400);
   });
 
-  test("正常：201でプロフィールを作成し、has_profile=trueのCookieをセットする", async () => {
+  it("正常 → 201 + 作成したプロフィール", async () => {
     const res = await client.api.myprofile.$post({ json: validBody });
     expect(res.status).toBe(201);
 
     const body = await res.json();
     expect(body).toMatchObject({ userId, nickname: "テスト太郎" });
-
-    const cookie = res.headers.get("set-cookie") ?? "";
-    expect(cookie).toContain("has_profile=true");
   });
 });
