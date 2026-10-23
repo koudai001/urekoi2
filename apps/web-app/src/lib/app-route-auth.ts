@@ -5,14 +5,14 @@ import { fetchMyProfile } from "./myprofile";
 import { queryKeys } from "./queries";
 
 // _app.beforeLoad 用の認証ガード
-// 未ログインなら /login、プロフィール未作成なら /signup/profile へ
+// 未ログインなら /、プロフィール未作成なら /signup/profile へ
 export async function requireProfiledSession(queryClient: QueryClient) {
   const { data } = await authClient.getSession();
   if (data === null) {
-    throw redirect({ to: "/login" });
+    throw redirect({ to: "/" });
   }
 
-  const profile = await queryClient.ensureQueryData({
+  const profile = await queryClient.query({
     queryKey: queryKeys.myprofile,
     queryFn: fetchMyProfile,
   });

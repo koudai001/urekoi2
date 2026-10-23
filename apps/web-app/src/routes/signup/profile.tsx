@@ -2,6 +2,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { SignupIntro } from "../../components/signup/profile/SignupIntro";
 import { SignupGender } from "../../components/signup/profile/SignupGender";
 import { SignupBirthday } from "../../components/signup/profile/SignupBirthday";
@@ -13,6 +14,7 @@ import {
   type ProfileFormValues,
 } from "../../components/signup/profile/profile-schema";
 import { apiClient, SERVER_ERROR_MESSAGE } from "../../lib/api-client";
+import { queryKeys } from "../../lib/queries";
 
 export const Route = createFileRoute("/signup/profile")({
   component: SignupProfile,
@@ -35,6 +37,7 @@ function SignupProfile() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const handleCreateProfile = async () => {
     setIsSubmitting(true);
@@ -66,7 +69,7 @@ function SignupProfile() {
       }
       return;
     }
-
+    await queryClient.invalidateQueries({ queryKey: queryKeys.myprofile });
     navigate({ to: "/search" });
   };
 
