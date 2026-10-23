@@ -28,6 +28,12 @@ middleware/          共通ミドルウェア
 db/schema/           1テーブル1ファイル
 ```
 
+## web-app データフロー
+
+- サーバ状態は TanStack Query のキャッシュに一本化
+- ルート（beforeLoad / loader）で取得 → ページはキャッシュから読む
+- 更新成功時は対象クエリのみ invalidate
+
 ## 認証
 
 - better-authを使用
