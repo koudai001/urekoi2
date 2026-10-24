@@ -1,9 +1,10 @@
 {
-  "name": "urekoi2",
+  "name": "ur-workers-api",
   "main": "src/index.tsx",
   "compatibility_date": "2026-09-06",
   // nodemailer（ローカルの Mailpit への送信）が Node の net / tls などを使うため
   "compatibility_flags": ["nodejs_compat"],
+  "send_email": [{ "name": "EMAIL" }],
   "observability": {
     "enabled": true
   },

@@ -1,3 +1,4 @@
+import { sendWithCloudflare } from "./providers/cloudflare";
 import { sendWithSMTP } from "./providers/smtp";
 import type { EmailConfig, EmailOptions, EmailResponse } from "./types";
 
@@ -10,7 +11,10 @@ export async function sendEmail(
       case "smtp":
         return { success: true, data: await sendWithSMTP(options, config) };
       case "cloudflare":
-        throw new Error("Cloudflare での送信はまだ実装していません");
+        return {
+          success: true,
+          data: await sendWithCloudflare(options, config),
+        };
     }
   } catch (error) {
     return {

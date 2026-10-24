@@ -1,5 +1,4 @@
 import { createRoute, type RouteHandler } from "@hono/zod-openapi";
-import { setCookie } from "hono/cookie";
 import { myProfileService } from "../../application/myprofile/service";
 import { createProfileSchema, profileResponseSchema } from "./schema";
 
@@ -35,15 +34,6 @@ export const handler: RouteHandler<
     console.error(err);
     return c.json({ error: "internal server error" }, 500);
   }
-
-  // プロフィール設定済みクッキーを設定する
-  setCookie(c, "has_profile", "true", {
-    httpOnly: false,
-    secure: true,
-    sameSite: "Strict",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
-  });
 
   return c.json(created, 201);
 };

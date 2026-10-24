@@ -7,7 +7,7 @@ import { getEmailConfig, OtpEmail, sendEmail } from "@urekoi/email";
 import { db } from "../db";
 import * as schema from "../db/schema";
 
-const emailConfig = getEmailConfig(env);
+const emailConfig = getEmailConfig(env, { email: env.EMAIL });
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {

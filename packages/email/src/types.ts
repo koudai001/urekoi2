@@ -9,7 +9,7 @@ export type EmailProvider = "smtp" | "cloudflare";
  */
 export interface EmailSendBinding {
   send(message: {
-    from: string;
+    from: string | { name: string; email: string };
     to: string;
     subject: string;
     html: string;
