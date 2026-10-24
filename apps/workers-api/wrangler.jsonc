@@ -1,10 +1,16 @@
 {
-  "name": "ur-workers-api",
+  "name": "urekoi2",
   "main": "src/index.tsx",
   "compatibility_date": "2026-09-06",
   // nodemailer（ローカルの Mailpit への送信）が Node の net / tls などを使うため
   "compatibility_flags": ["nodejs_compat"],
   "send_email": [{ "name": "EMAIL" }],
+  // 本番用の環境変数（シークレットは wrangler secret で設定する）
+  "vars": {
+    "APP_URL": "https://urekoi.com",
+    "EMAIL_PROVIDER": "cloudflare",
+    "EMAIL_FROM": "熟恋 <no-reply@urekoi.com>"
+  },
   "observability": {
     "enabled": true
   },
