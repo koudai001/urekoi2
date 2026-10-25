@@ -1,0 +1,10 @@
+{
+  "name": "@urekoi/logger",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "peerDependencies": {
+    "@sentry/core": "^11.9.0"
+  }
+}

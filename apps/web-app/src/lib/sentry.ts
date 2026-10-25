@@ -8,5 +8,6 @@ export const initSentry = (): void => {
     // パフォーマンス計測（ページ読み込み・画面遷移の10%だけ記録する）
     integrations: [Sentry.browserTracingIntegration()],
     tracesSampleRate: 0.1,
+    enableLogs: true,
   });
 };
