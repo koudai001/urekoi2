@@ -27,8 +27,7 @@ export function SignupBirthday({
   const year = watch("birthYear");
   const month = watch("birthMonth");
   const day = watch("birthDay");
-  const canProceed =
-    year.length === 4 && month.length >= 1 && day.length >= 1;
+  const canProceed = year.length === 4 && month.length >= 1 && day.length >= 1;
 
   const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue("birthYear", sanitizeDigits(e.target.value, 4));

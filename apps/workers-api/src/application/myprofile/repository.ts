@@ -3,7 +3,7 @@ import { db } from "../../db";
 import { profile } from "../../db/schema";
 import type { CreateProfileInput } from "../../api/myprofile/schema";
 
-type ProfileRow = typeof profile.$inferSelect;
+export type ProfileRow = typeof profile.$inferSelect;
 
 export interface MyProfileRepository {
   findProfile(userId: string): Promise<ProfileRow | null>;

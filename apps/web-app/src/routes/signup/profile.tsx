@@ -21,7 +21,12 @@ export const Route = createFileRoute("/signup/profile")({
 });
 
 type Step =
-  "intro" | "gender" | "birthday" | "location" | "nickname" | "confirm";
+  | "intro"
+  | "gender"
+  | "birthday"
+  | "location"
+  | "nickname"
+  | "confirm";
 
 function SignupProfile() {
   const form = useForm<ProfileFormValues>({
@@ -62,10 +67,11 @@ function SignupProfile() {
         case 500:
           setErrorMessage(SERVER_ERROR_MESSAGE);
           break;
-        default:
+        default: {
           // exhaustive check
           const _exhaustiveCheck: never = res;
           throw new Error(`Unexpected status code: ${_exhaustiveCheck}`);
+        }
       }
       return;
     }

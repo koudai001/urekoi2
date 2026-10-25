@@ -4,9 +4,12 @@
   "packageManager": "pnpm@8.6.3",
   "scripts": {
     "typecheck": "turbo typecheck",
-    "build": "turbo build"
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.6.3",
     "turbo": "^2.11.10"
   }
 }

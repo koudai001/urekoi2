@@ -1,5 +1,7 @@
 import { createRoute, type RouteHandler } from "@hono/zod-openapi";
+import * as logger from "@urekoi/logger";
 import { myProfileService } from "../../application/myprofile/service";
+import type { ProfileRow } from "../../application/myprofile/repository";
 import { createProfileSchema, profileResponseSchema } from "./schema";
 
 export const route = createRoute({
@@ -27,11 +29,11 @@ export const handler: RouteHandler<
   const userId = c.get("userId");
   const data = c.req.valid("json");
 
-  let created;
+  let created: ProfileRow;
   try {
     created = await myProfileService.createProfile(userId, data);
   } catch (err) {
-    console.error(err);
+    logger.error("プロフィールの作成に失敗", { error: err, userId });
     return c.json({ error: "internal server error" }, 500);
   }
 

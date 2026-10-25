@@ -63,9 +63,7 @@ export function SignupConfirm({
         </dl>
 
         {errorMessage && (
-          <p className="mt-4 text-sm font-medium text-error">
-            {errorMessage}
-          </p>
+          <p className="mt-4 text-sm font-medium text-error">{errorMessage}</p>
         )}
 
         <div className="mt-8">

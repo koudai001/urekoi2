@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useNavigate } from "@tanstack/react-router";
-import { type SignupFormValues } from "./signup-schema";
+import type { SignupFormValues } from "./signup-schema";
 import { OtpStep } from "../login/OtpStep";
 import { useSendOtp } from "../login/use-login";
 import { Button } from "../ui/Button";
