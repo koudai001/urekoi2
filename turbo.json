@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/turbo/schema.json",
+  "tasks": {
+    "typecheck": {},
+    "@urekoi/web-app#build": {
+      "outputs": ["dist/**"]
+    }
+  }
+}

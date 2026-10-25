@@ -1,0 +1,12 @@
+{
+  "name": "urekoi2",
+  "private": true,
+  "packageManager": "pnpm@8.6.3",
+  "scripts": {
+    "typecheck": "turbo typecheck",
+    "build": "turbo build"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.10"
+  }
+}
