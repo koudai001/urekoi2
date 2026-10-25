@@ -23,6 +23,9 @@ importers:
       '@urekoi/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@urekoi/logger':
+        specifier: workspace:^
+        version: link:../../packages/logger
       better-auth:
         specifier: ^1.7.3
         version: 1.7.5(react-dom@19.3.0)(react@19.3.0)
@@ -178,6 +181,12 @@ importers:
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
+
+  packages/logger:
+    dependencies:
+      '@sentry/core':
+        specifier: ^11.9.0
+        version: 11.9.0
 
 packages:
 
