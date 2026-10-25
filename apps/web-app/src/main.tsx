@@ -3,9 +3,11 @@ import { createRoot } from "react-dom/client";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Providers, queryClient } from "./app/providers";
 import { loadGoogleTagManager, trackSpaPageViews } from "./lib/gtm";
+import { initSentry } from "./lib/sentry";
 import { routeTree } from "./routeTree.gen";
 import "./globals.css";
 
+initSentry();
 // vite build では MODE が "production" になり、本番だけ GTM を読み込む
 loadGoogleTagManager(import.meta.env.MODE);
 
