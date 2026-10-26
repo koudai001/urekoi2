@@ -53,9 +53,7 @@ export function getEmailConfig(
 ): EmailConfig {
   const result = envSchema.safeParse(env);
   if (!result.success) {
-    throw new Error(
-      `メールの設定が不正です\n${z.prettifyError(result.error)}`,
-    );
+    throw new Error(`メールの設定が不正です\n${z.prettifyError(result.error)}`);
   }
 
   const parsed = result.data;

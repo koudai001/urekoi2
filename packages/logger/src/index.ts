@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noConsole: console のラッパー */
 // @sentry/core は peerDependencies（使う側と同じものを共有しないと、初期化済みの Sentry に送れない）
 import * as Sentry from "@sentry/core";
 

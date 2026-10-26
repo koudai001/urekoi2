@@ -6,9 +6,12 @@ apps/
   workers-api/   API: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
 packages/
   core/          web-app/workers-api共通の定数・型
+  email/         メール送信
+  logger/        ログ（console + Sentry）
 ```
 
 - infra: Cloudflare Workers（同一オリジン）
+- tools: Turborepo / Biome / Sentry / GTM
 
 ## workers-api構成(レイヤードアーキテクチャ)
 

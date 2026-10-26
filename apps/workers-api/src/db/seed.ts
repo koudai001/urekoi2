@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noConsole: 手元で実行するスクリプト */
 import "dotenv/config";
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";

@@ -4,6 +4,7 @@ import { emailOTP } from "better-auth/plugins";
 import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { getEmailConfig, OtpEmail, sendEmail } from "@urekoi/email";
+import * as logger from "@urekoi/logger";
 import { db } from "../db";
 import * as schema from "../db/schema";
 
@@ -25,7 +26,9 @@ export const auth = betterAuth({
           react: OtpEmail({ otp }),
         });
         if (!result.success) {
-          console.error("認証コードのメール送信に失敗しました", result.error);
+          logger.error("認証コードのメール送信に失敗しました", {
+            error: result.error,
+          });
           throw new Error(result.error.message);
         }
       },

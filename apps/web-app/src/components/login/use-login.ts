@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import * as logger from "@urekoi/logger";
 import { z } from "zod";
 import { authClient } from "../../lib/auth-client";
 
@@ -23,7 +24,7 @@ export function useSendOtp() {
       });
 
       if (error) {
-        console.error(error);
+        logger.error("認証コードの送信に失敗", { error });
         throw new Error(error.message);
       }
     },
@@ -37,7 +38,7 @@ export function useLogin() {
       const { error } = await authClient.signIn.emailOtp({ email, otp });
 
       if (error) {
-        console.error(error);
+        logger.error("ログインに失敗", { error });
         throw new Error(error.message);
       }
     },

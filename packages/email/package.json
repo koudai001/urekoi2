@@ -7,7 +7,9 @@
   "types": "./src/index.ts",
   "scripts": {
     "mailpit": "tsx scripts/run-mailpit.ts",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "lint": "biome check src",
+    "lint:fix": "biome check --write src"
   },
   "dependencies": {
     "nodemailer": "^10.1.0",
