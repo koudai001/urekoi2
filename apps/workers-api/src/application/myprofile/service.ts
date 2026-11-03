@@ -1,3 +1,4 @@
+import type { Db } from "../../db";
 import { myProfileRepository } from "./repository";
 import type { CreateProfileInput } from "../../api/myprofile/schema";
 
@@ -6,10 +7,14 @@ export const myProfileService = {
   createProfile,
 };
 
-async function getProfile(userId: string) {
-  return myProfileRepository.findProfile(userId);
+async function getProfile(db: Db, userId: string) {
+  return myProfileRepository.findProfile(db, userId);
 }
 
-async function createProfile(userId: string, input: CreateProfileInput) {
-  return myProfileRepository.createProfile(userId, input);
+async function createProfile(
+  db: Db,
+  userId: string,
+  input: CreateProfileInput,
+) {
+  return myProfileRepository.createProfile(db, userId, input);
 }

@@ -1,5 +1,6 @@
 import { createRoute, type RouteHandler } from "@hono/zod-openapi";
 import * as logger from "@urekoi/logger";
+import type { AppEnv } from "../../app";
 import { myProfileService } from "../../application/myprofile/service";
 import type { ProfileRow } from "../../application/myprofile/repository";
 import { createProfileSchema, profileResponseSchema } from "./schema";
@@ -24,14 +25,17 @@ export const route = createRoute({
 
 export const handler: RouteHandler<
   typeof route,
-  { Bindings: Env; Variables: { userId: string } }
+  {
+    Bindings: AppEnv["Bindings"];
+    Variables: AppEnv["Variables"] & { userId: string };
+  }
 > = async (c) => {
   const userId = c.get("userId");
   const data = c.req.valid("json");
 
   let created: ProfileRow;
   try {
-    created = await myProfileService.createProfile(userId, data);
+    created = await myProfileService.createProfile(c.var.db, userId, data);
   } catch (err) {
     logger.error("プロフィールの作成に失敗", { error: err, userId });
     return c.json({ error: "internal server error" }, 500);

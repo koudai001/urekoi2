@@ -1,13 +1,17 @@
 import { eq } from "drizzle-orm";
-import { db } from "../../db";
+import type { Db } from "../../db";
 import { profile } from "../../db/schema";
 import type { CreateProfileInput } from "../../api/myprofile/schema";
 
 export type ProfileRow = typeof profile.$inferSelect;
 
 export interface MyProfileRepository {
-  findProfile(userId: string): Promise<ProfileRow | null>;
-  createProfile(userId: string, input: CreateProfileInput): Promise<ProfileRow>;
+  findProfile(db: Db, userId: string): Promise<ProfileRow | null>;
+  createProfile(
+    db: Db,
+    userId: string,
+    input: CreateProfileInput,
+  ): Promise<ProfileRow>;
 }
 
 export const myProfileRepository: MyProfileRepository = {
@@ -16,7 +20,7 @@ export const myProfileRepository: MyProfileRepository = {
 };
 
 // 見つからなければ null を返す
-async function findProfile(userId: string): Promise<ProfileRow | null> {
+async function findProfile(db: Db, userId: string): Promise<ProfileRow | null> {
   const [found] = await db
     .select()
     .from(profile)
@@ -27,6 +31,7 @@ async function findProfile(userId: string): Promise<ProfileRow | null> {
 }
 
 async function createProfile(
+  db: Db,
   userId: string,
   input: CreateProfileInput,
 ): Promise<ProfileRow> {
