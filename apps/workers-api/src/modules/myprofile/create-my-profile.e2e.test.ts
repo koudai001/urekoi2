@@ -1,9 +1,9 @@
 import { testClient } from "hono/testing";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { db } from "../../db";
+import type { AppType } from "../../app";
 import { user } from "../../db/schema";
-import { routes } from "../../index";
 import { setCurrentUserId } from "../../middleware/require-auth.mock";
+import { createTestApp } from "../../test/test-app";
 
 // ミドルウェアのモック
 vi.mock(
@@ -11,10 +11,13 @@ vi.mock(
   () => import("../../middleware/require-auth.mock"),
 );
 
+let client: ReturnType<typeof testClient<AppType>>;
 let userId: string;
 
-// userを作成して、requireAuthミドルウェアのモックにセットする
+// テストごとに空の DB を作り、user を作ってモックにセットする
 beforeEach(async () => {
+  const { app, db } = await createTestApp();
+  client = testClient(app);
   userId = crypto.randomUUID();
   await db.insert(user).values({
     id: userId,
@@ -30,8 +33,6 @@ const validBody = {
   birthdate: "1990-01-01",
   prefectureCode: 13,
 };
-
-const client = testClient(routes);
 
 describe("POST /api/myprofile", () => {
   it("バリデーション不正 → 400", async () => {

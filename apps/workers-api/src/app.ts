@@ -1,8 +1,8 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
-import { myprofile } from "./api/myprofile";
 import type { db } from "./db";
 import type { auth } from "./lib/auth";
+import { myprofileRoutes } from "./modules/myprofile/myprofile.routes";
 import { searchRoutes } from "./modules/search/search.routes";
 
 export type AppEnv = {
@@ -27,7 +27,7 @@ export function createApp({ db, auth }: AppDeps) {
 
   const routes = api
     .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
-    .route("/myprofile", myprofile)
+    .route("/myprofile", myprofileRoutes())
     .route("/search", searchRoutes());
 
   api.doc("/doc", {

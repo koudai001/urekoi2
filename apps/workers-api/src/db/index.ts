@@ -7,5 +7,3 @@ export const db = drizzle({
     authToken: env.TURSO_AUTH_TOKEN!,
   },
 });
-
-export type Db = typeof db;
