@@ -32,12 +32,12 @@ export async function sendEmail(
   }
 }
 
-export { getEmailConfig } from "./config";
 export type { EmailBindings } from "./config";
+export { getEmailConfig } from "./config";
+export * from "./templates/otp-email";
 export type {
   EmailConfig,
   EmailOptions,
   EmailResponse,
   EmailSendBinding,
 } from "./types";
-export * from "./templates/otp-email";

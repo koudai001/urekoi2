@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
 import { createFileRoute } from "@tanstack/react-router";
-import { SignupLanding } from "../../components/signup/SignupLanding";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { SignupConsent } from "../../components/signup/SignupConsent";
 import { SignupEmailForm } from "../../components/signup/SignupEmailForm";
+import { SignupLanding } from "../../components/signup/SignupLanding";
 import {
-  signupSchema,
   type SignupFormValues,
+  signupSchema,
 } from "../../components/signup/signup-schema";
 
 export const Route = createFileRoute("/signup/")({

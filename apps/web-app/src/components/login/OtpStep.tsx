@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import { useLogin, otpSchema, type OtpFormValues } from "./use-login";
+import { type OtpFormValues, otpSchema, useLogin } from "./use-login";
 
 // 届いたコードを入力してログイン/新規登録する
 export function OtpStep({

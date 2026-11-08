@@ -1,10 +1,10 @@
 import { env } from "cloudflare:workers";
-import { betterAuth } from "better-auth";
-import { emailOTP } from "better-auth/plugins";
-import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
+import { i18n, locales } from "@better-auth/i18n";
 import { getEmailConfig, OtpEmail, sendEmail } from "@urekoi/email";
 import * as logger from "@urekoi/logger";
+import { betterAuth } from "better-auth";
+import { emailOTP } from "better-auth/plugins";
 import { db } from "../db";
 import * as schema from "../db/schema";
 

@@ -1,5 +1,5 @@
 import { defineRelationsPart, sql } from "drizzle-orm";
-import { sqliteTable, text, integer, index } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 // better-authで生成
 export const user = sqliteTable("user", {

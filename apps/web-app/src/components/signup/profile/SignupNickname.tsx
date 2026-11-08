@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
-import { SignupProgressBar } from "./SignupProgressBar";
-import { SignupNextButton } from "./SignupNextButton";
 import type { ProfileFormValues } from "./profile-schema";
+import { SignupNextButton } from "./SignupNextButton";
+import { SignupProgressBar } from "./SignupProgressBar";
 
 // 表示名(ニックネーム)入力
 export function SignupNickname({
