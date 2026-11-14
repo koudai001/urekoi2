@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
-import { Button } from "../ui/Button";
 import { BackHeader } from "../ui/BackHeader";
+import { Button } from "../ui/Button";
 
 // ログイン方法選択画面
 export function LoginLanding({ onSelectEmail }: { onSelectEmail: () => void }) {

@@ -1,6 +1,6 @@
 import { Timer } from "lucide-react";
-import { SignupProgressBar } from "./SignupProgressBar";
 import { SignupNextButton } from "./SignupNextButton";
+import { SignupProgressBar } from "./SignupProgressBar";
 
 // オンボーディング導入(プロフィール入力の案内)
 export function SignupIntro({ onNext }: { onNext: () => void }) {

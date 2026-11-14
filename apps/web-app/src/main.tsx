@@ -1,6 +1,6 @@
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Providers, queryClient } from "./app/providers";
 import { loadGoogleTagManager, trackSpaPageViews } from "./lib/gtm";
 import { initSentry } from "./lib/sentry";

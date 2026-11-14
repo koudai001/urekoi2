@@ -1,9 +1,9 @@
 /** biome-ignore-all lint/suspicious/noConsole: 手元で実行するスクリプト */
 import "dotenv/config";
 import { createClient } from "@libsql/client";
+import { PREFECTURES as prefectures } from "@urekoi/core";
 import { drizzle } from "drizzle-orm/libsql";
 import { prefecture } from "./schema";
-import { PREFECTURES as prefectures } from "@urekoi/core";
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL!,

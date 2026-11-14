@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
-import { Button } from "../ui/Button";
 import { BackHeader } from "../ui/BackHeader";
+import { Button } from "../ui/Button";
 
 // 新規登録方法選択画面
 export function SignupLanding({

@@ -1,8 +1,8 @@
 import { Check } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import type { SignupFormValues } from "./signup-schema";
-import { Button } from "../ui/Button";
 import { BackHeader } from "../ui/BackHeader";
+import { Button } from "../ui/Button";
+import type { SignupFormValues } from "./signup-schema";
 
 // 年齢・規約への同意を取る。
 export function SignupConsent({

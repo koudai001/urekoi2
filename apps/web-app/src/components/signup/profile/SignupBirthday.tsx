@@ -1,9 +1,9 @@
 import type { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
-import { SignupProgressBar } from "./SignupProgressBar";
-import { SignupNextButton } from "./SignupNextButton";
 import type { ProfileFormValues } from "./profile-schema";
+import { SignupNextButton } from "./SignupNextButton";
+import { SignupProgressBar } from "./SignupProgressBar";
 
 // 数字以外を除去し、指定桁数までに切り詰める
 function sanitizeDigits(value: string, maxLength: number) {

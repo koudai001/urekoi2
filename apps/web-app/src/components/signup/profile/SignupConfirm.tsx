@@ -1,5 +1,5 @@
-import { useFormContext } from "react-hook-form";
 import { PREFECTURES } from "@urekoi/core";
+import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { Button } from "../../ui/Button";
 import type { ProfileFormValues } from "./profile-schema";

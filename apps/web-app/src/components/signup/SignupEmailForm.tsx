@@ -1,12 +1,12 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useNavigate } from "@tanstack/react-router";
-import type { SignupFormValues } from "./signup-schema";
 import { OtpStep } from "../login/OtpStep";
 import { useSendOtp } from "../login/use-login";
+import { BackHeader } from "../ui/BackHeader";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import { BackHeader } from "../ui/BackHeader";
+import type { SignupFormValues } from "./signup-schema";
 
 // メールアドレスに認証コードを送り、届いたコードで登録する
 export function SignupEmailForm({ onBack }: { onBack: () => void }) {

@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { BackHeader } from "../ui/BackHeader";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { OtpStep } from "./OtpStep";
-import { useSendOtp, emailSchema, type EmailFormValues } from "./use-login";
+import { type EmailFormValues, emailSchema, useSendOtp } from "./use-login";
 
 // メールアドレスにログインコードを送り、届いたコードでログインする
 export function LoginEmailForm({ onBack }: { onBack: () => void }) {

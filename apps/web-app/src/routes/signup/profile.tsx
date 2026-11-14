@@ -1,18 +1,18 @@
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { SignupIntro } from "../../components/signup/profile/SignupIntro";
-import { SignupGender } from "../../components/signup/profile/SignupGender";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  type ProfileFormValues,
+  profileSchema,
+} from "../../components/signup/profile/profile-schema";
 import { SignupBirthday } from "../../components/signup/profile/SignupBirthday";
+import { SignupConfirm } from "../../components/signup/profile/SignupConfirm";
+import { SignupGender } from "../../components/signup/profile/SignupGender";
+import { SignupIntro } from "../../components/signup/profile/SignupIntro";
 import { SignupLocation } from "../../components/signup/profile/SignupLocation";
 import { SignupNickname } from "../../components/signup/profile/SignupNickname";
-import { SignupConfirm } from "../../components/signup/profile/SignupConfirm";
-import {
-  profileSchema,
-  type ProfileFormValues,
-} from "../../components/signup/profile/profile-schema";
 import { apiClient, SERVER_ERROR_MESSAGE } from "../../lib/api-client";
 import { queryKeys } from "../../lib/queries";
 
