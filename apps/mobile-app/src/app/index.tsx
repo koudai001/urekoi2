@@ -1,7 +1,9 @@
+import { Link } from "expo-router";
 import { View } from "react-native";
-import { TopButton } from "@/components/top/top-button";
 import { AppImage } from "@/components/ui/app-image";
 import { AppText } from "@/components/ui/app-text";
+import { Button } from "@/components/ui/button";
+import { Text } from "@/components/ui/text";
 
 export default function Index() {
   return (
@@ -20,8 +22,16 @@ export default function Index() {
       </View>
 
       <View className="gap-3">
-        <TopButton variant="signup" title="新しくはじめる（無料）" />
-        <TopButton variant="login" title="すでに登録されている方はこちら" />
+        <Link href="/signup" asChild>
+          <Button className="h-16 rounded-xl">
+            <Text className="text-lg">新しくはじめる（無料）</Text>
+          </Button>
+        </Link>
+        <Link href="/login" asChild>
+          <Button variant="outline" className="h-16 rounded-xl bg-white">
+            <Text className="text-lg">すでに登録されている方はこちら</Text>
+          </Button>
+        </Link>
       </View>
     </View>
   );

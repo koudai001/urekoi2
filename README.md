@@ -3,6 +3,9 @@
 ```
 apps/
   web-app/       SPAの静的配信: React / TanStack Router / TanStack Query / react-hook-form
+  mobile-app/    スマホアプリ: Expo
+  web-e2e/       web-app の E2E: Playwright
+  mobile-e2e/    mobile-app の E2E: Maestro
   workers-api/   API: Hono / Cloudflare Workers / Drizzle ORM / Turso(libSQL、マルチリージョンread replica) / better-auth
 packages/
   core/          web-app/workers-api共通の定数・型
@@ -13,23 +16,21 @@ packages/
 - infra: Cloudflare Workers（同一オリジン）
 - tools: Turborepo / Biome / Sentry / GTM
 
-## workers-api構成(レイヤードアーキテクチャ)
+## workers-api構成(垂直スライス)
 
 ```
-api/<name>/          HTTP層
-  index.ts           ルートの登録（共通ミドルウェアもここ）
-  post.ts など       1エンドポイント1ファイル（route と handler）
-  post.test.ts など  エンドポイントのテスト
-  schema.ts          zod（リクエスト・レスポンスの形）
+modules/<機能>/                  1機能1ディレクトリ
+  <機能>.routes.ts               機能内のルートをまとめる（共通ミドルウェアもここ）
+  <動詞-名詞>.ts                 1エンドポイント1ファイル（zod・route・handler・DBアクセス）
+  <動詞-名詞>.test.ts            エンドポイントのテスト
 
-application/<name>/
-  service.ts         業務ロジック
-  repository.ts      DBアクセス
-
-lib/                 共通処理
-middleware/          共通ミドルウェア
-db/schema/           1テーブル1ファイル
+lib/                             共通処理
+middleware/                      共通ミドルウェア
+db/schema/                       1テーブル1ファイル
+test/                            テスト用のアプリ・DB
 ```
+
+例: `modules/myprofile/create-my-profile.ts`
 
 ## web-app データフロー
 
