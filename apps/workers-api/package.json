@@ -17,8 +17,9 @@
     "db:seed:test": "DOTENV_CONFIG_PATH=.env.test DOTENV_OVERRIDE=true pnpm tsx src/db/seed.ts"
   },
   "dependencies": {
-    "@better-auth/drizzle-adapter": "^1.7.3",
-    "@better-auth/i18n": "^1.7.5",
+    "@better-auth/drizzle-adapter": "^1.7.23",
+    "@better-auth/expo": "^1.7.23",
+    "@better-auth/i18n": "^1.7.23",
     "@hono/zod-openapi": "^1.6.3",
     "@hono/zod-validator": "^0.9.1",
     "@libsql/client": "^0.18.0",
@@ -26,7 +27,7 @@
     "@urekoi/core": "workspace:*",
     "@urekoi/email": "workspace:^",
     "@urekoi/logger": "workspace:^",
-    "better-auth": "^1.7.5",
+    "better-auth": "^1.7.23",
     "dotenv": "^17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
     "drizzle-zod": "^0.8.3",

@@ -1,11 +1,11 @@
 import { Link } from "expo-router";
 import { View } from "react-native";
-import { AppImage } from "@/components/ui/app-image";
-import { AppText } from "@/components/ui/app-text";
-import { Button } from "@/components/ui/button";
-import { Text } from "@/components/ui/text";
+import { AppImage } from "@/shared/ui/app-image";
+import { AppText } from "@/shared/ui/app-text";
+import { Button } from "@/shared/ui/button";
+import { Text } from "@/shared/ui/text";
 
-export default function Index() {
+export function TopPage() {
   return (
     <View className="flex-1 justify-center gap-12 px-6">
       <View className="items-center">
