@@ -10,3 +10,6 @@ allowBuilds:
 packages:
   - "apps/*"
   - "packages/*"
+peerDependencyRules:
+  allowedVersions:
+    drizzle-orm>@sinclair/typebox: "*"

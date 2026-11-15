@@ -1,5 +1,6 @@
 import { env } from "cloudflare:workers";
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
+import { expo } from "@better-auth/expo";
 import { i18n, locales } from "@better-auth/i18n";
 import { getEmailConfig, OtpEmail, sendEmail } from "@urekoi/email";
 import * as logger from "@urekoi/logger";
@@ -16,7 +17,12 @@ export const auth = betterAuth({
     schema: schema,
   }),
   baseURL: env.APP_URL,
+  trustedOrigins: [
+    "mobileapp://",
+    ...(process.env.NODE_ENV === "development" ? ["exp://"] : []),
+  ],
   plugins: [
+    expo(),
     emailOTP({
       storeOTP: "hashed",
       async sendVerificationOTP({ email, otp }) {

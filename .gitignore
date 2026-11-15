@@ -35,6 +35,3 @@ lerna-debug.log*
 
 # claude code (local only)
 .claude/
-
-# TanStack Router (auto-generated)
-routeTree.gen.ts

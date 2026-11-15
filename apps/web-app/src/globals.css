@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@urekoi/core/src/theme.css";
+@import "@urekoi/core/theme.css";
 
 @theme {
   --font-sans: -apple-system, BlinkMacSystemFont, Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
