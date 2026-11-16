@@ -2,8 +2,8 @@ import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import * as logger from "@urekoi/logger";
 import { and, desc, eq, lt, ne, or, type SQL } from "drizzle-orm";
 import { createSelectSchema } from "drizzle-zod";
-import type { AppEnv } from "../../app";
 import { profile } from "../../db/schema";
+import type { AuthedEnv } from "../_shared/context";
 
 // 1 回に返す件数（既定と上限）
 const DEFAULT_LIMIT = 20;
@@ -61,10 +61,7 @@ const route = createRoute({
 });
 
 export function listSearchProfilesRoute() {
-  return new OpenAPIHono<{
-    Bindings: AppEnv["Bindings"];
-    Variables: AppEnv["Variables"] & { userId: string };
-  }>().openapi(route, async (c) => {
+  return new OpenAPIHono<AuthedEnv>().openapi(route, async (c) => {
     const db = c.var.db;
     const userId = c.get("userId");
     const query = c.req.valid("query");

@@ -1,18 +1,14 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
-import type { db } from "./db";
-import type { auth } from "./lib/auth";
+import type { Db } from "./db";
+import type { Auth } from "./modules/_shared/auth";
+import type { AppEnv } from "./modules/_shared/context";
 import { myprofileRoutes } from "./modules/myprofile/myprofile.routes";
 import { searchRoutes } from "./modules/search/search.routes";
 
-export type AppEnv = {
-  Bindings: Env;
-  Variables: { db: typeof db; auth: typeof auth };
-};
-
 interface AppDeps {
-  db: typeof db;
-  auth: typeof auth;
+  db: Db;
+  auth: Auth;
 }
 
 export function createApp({ db, auth }: AppDeps) {
