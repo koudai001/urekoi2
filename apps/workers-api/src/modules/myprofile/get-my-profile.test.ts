@@ -2,13 +2,13 @@ import { testClient } from "hono/testing";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { AppType } from "../../app";
 import { user } from "../../db/schema";
-import { setCurrentUserId } from "../../middleware/require-auth.mock";
 import { createTestApp } from "../../test/test-app";
+import { setCurrentUserId } from "../_shared/require-auth.mock";
 
 // ミドルウェアのモック
 vi.mock(
-  "../../middleware/require-auth",
-  () => import("../../middleware/require-auth.mock"),
+  "../_shared/require-auth",
+  () => import("../_shared/require-auth.mock"),
 );
 
 let client: ReturnType<typeof testClient<AppType>>;

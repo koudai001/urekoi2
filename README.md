@@ -23,11 +23,6 @@ modules/<機能>/                  1機能1ディレクトリ
   <機能>.routes.ts               機能内のルートをまとめる（共通ミドルウェアもここ）
   <動詞-名詞>.ts                 1エンドポイント1ファイル（zod・route・handler・DBアクセス）
   <動詞-名詞>.test.ts            エンドポイントのテスト
-
-lib/                             共通処理
-middleware/                      共通ミドルウェア
-db/schema/                       1テーブル1ファイル
-test/                            テスト用のアプリ・DB
 ```
 
 例: `modules/myprofile/create-my-profile.ts`

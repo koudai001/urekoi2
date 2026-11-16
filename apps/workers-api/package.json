@@ -1,7 +1,7 @@
 {
   "name": "@urekoi/workers-api",
   "type": "module",
-  "types": "./src/index.tsx",
+  "types": "./src/worker.ts",
   "scripts": {
     "dev": "wrangler dev",
     "mailpit": "pnpm --filter @urekoi/email mailpit",
@@ -9,7 +9,6 @@
     "lint": "biome check src",
     "lint:fix": "biome check --write src",
     "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types",
     "test": "vitest run",
     "db:push": "drizzle-kit push",
     "db:push:test": "drizzle-kit push --config drizzle.test.config.ts",

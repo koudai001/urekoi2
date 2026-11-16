@@ -2,8 +2,8 @@ import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
 import * as logger from "@urekoi/logger";
 import { eq } from "drizzle-orm";
 import { createSelectSchema } from "drizzle-zod";
-import type { AppEnv } from "../../app";
 import { profile } from "../../db/schema";
+import type { AuthedEnv } from "../_shared/context";
 
 type ProfileRow = typeof profile.$inferSelect;
 
@@ -22,10 +22,7 @@ const route = createRoute({
 });
 
 export function getMyProfileRoute() {
-  return new OpenAPIHono<{
-    Bindings: AppEnv["Bindings"];
-    Variables: AppEnv["Variables"] & { userId: string };
-  }>().openapi(route, async (c) => {
+  return new OpenAPIHono<AuthedEnv>().openapi(route, async (c) => {
     const db = c.var.db;
     const userId = c.get("userId");
 
