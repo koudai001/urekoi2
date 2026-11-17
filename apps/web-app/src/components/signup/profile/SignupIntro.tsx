@@ -1,3 +1,4 @@
+import woman3 from "@urekoi/core/assets/profiles/woman-3.webp";
 import { Timer } from "lucide-react";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
@@ -21,7 +22,7 @@ export function SignupIntro({ onNext }: { onNext: () => void }) {
         <SignupNextButton onNext={onNext} />
 
         <img
-          src="/profiles/woman-3.webp"
+          src={woman3}
           alt="登録イメージ"
           width={208}
           height={240}

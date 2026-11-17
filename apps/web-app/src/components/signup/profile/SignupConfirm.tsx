@@ -1,8 +1,8 @@
 import { PREFECTURES } from "@urekoi/core";
+import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { Button } from "../../ui/Button";
-import type { ProfileFormValues } from "./profile-schema";
 
 const GENDER_LABEL: Record<string, string> = {
   male: "男性",

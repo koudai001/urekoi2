@@ -6,11 +6,16 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./assets/*": "./assets/*",
+    "./domain/*": "./src/domain/*.ts",
     "./labels/*": "./src/labels/*.ts",
     "./theme.css": "./src/theme.css"
   },
   "scripts": {
     "lint": "biome check src",
     "lint:fix": "biome check --write src"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
   }
 }

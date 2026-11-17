@@ -29,10 +29,6 @@ function isRealDate(year: number, month: number, day: number): boolean {
   );
 }
 
-// base schemaは型だけ緩く合わせておく(必須・形式チェックはsuperRefineで行う)。
-// マルチステップの途中は他のフィールドがまだ未入力(空文字/undefined)なので、
-// base schemaで厳密なmin/maxまで見てしまうと、そこで検証が止まって
-// 後続のsuperRefine(実在日付・年齢などのクロスフィールドチェック)が一切実行されなくなるため
 export const profileSchema = z
   .object({
     gender: z.enum(["male", "female"]).optional(),

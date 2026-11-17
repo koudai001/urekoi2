@@ -1,0 +1,56 @@
+name: Deploy web-app (production)
+
+on:
+  push:
+    branches:
+      - main # 本番環境
+    paths:
+      - "apps/web-app/**"
+      - "packages/**"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/deploy-web-app.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: deploy-web-app-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    defaults:
+      run:
+        working-directory: apps/web-app
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mise.toml の node と pnpm の版を入れる
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      # VITE_API_URL は .env.production から読まれる
+      - name: Build SPA (Vite)
+        run: |
+          set -Eeuo pipefail
+          pnpm --filter @urekoi/web-app... build
+
+      - name: Deploy to Cloudflare Workers (Static Assets)
+        run: |
+          set -Eeuo pipefail
+          pnpm exec wrangler deploy

@@ -1,8 +1,11 @@
 import type { AppType } from "@urekoi/workers-api";
 import { hc } from "hono/client";
+import { API_URL } from "./api-url";
 
 // サーバーエラー(500)時に各画面で使い回す共通メッセージ
 export const SERVER_ERROR_MESSAGE =
   "サーバーエラーが発生しました。時間をおいて再度お試しください。";
 
-export const apiClient = hc<AppType>("/");
+export const apiClient = hc<AppType>(API_URL, {
+  init: { credentials: "include" },
+});

@@ -1,7 +1,7 @@
+import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import type { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
-import type { ProfileFormValues } from "./profile-schema";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
 

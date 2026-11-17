@@ -25,6 +25,18 @@ export const signup = {
   emailTermsNotice:
     "アカウント登録すると、利用規約・プライバシーポリシー・コミュニティガイドラインに同意したこととみなします。",
   otpSubmit: "登録する",
+  profile: {
+    next: "次へ",
+    intro: {
+      title: "あなたについて教えてください",
+      duration: "約30秒で完了します",
+    },
+    gender: {
+      title: "あなたの性別は？",
+      male: "男性",
+      female: "女性",
+    },
+  },
 };
 
 export const login = {
