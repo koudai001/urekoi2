@@ -381,6 +381,9 @@ importers:
       vite:
         specifier: ^8.3.0
         version: 8.3.6(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
+      wrangler:
+        specifier: ^4.158.0
+        version: 4.158.0(@types/node@26.6.6)
 
   apps/web-e2e:
     devDependencies:
@@ -470,7 +473,11 @@ importers:
         specifier: ^4.129.0
         version: 4.158.0(@types/node@26.6.6)
 
-  packages/core: {}
+  packages/core:
+    dependencies:
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
 
   packages/email:
     dependencies:

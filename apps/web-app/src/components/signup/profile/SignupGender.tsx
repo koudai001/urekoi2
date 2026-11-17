@@ -1,12 +1,14 @@
+import men1 from "@urekoi/core/assets/profiles/men-1.webp";
+import woman1 from "@urekoi/core/assets/profiles/woman-1.webp";
+import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
-import type { ProfileFormValues } from "./profile-schema";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
 
 const options = [
-  { value: "male", label: "男性", image: "/profiles/men-1.webp" },
-  { value: "female", label: "女性", image: "/profiles/woman-1.webp" },
+  { value: "male", label: "男性", image: men1 },
+  { value: "female", label: "女性", image: woman1 },
 ] as const;
 
 // signupフローのステップ2。性別選択

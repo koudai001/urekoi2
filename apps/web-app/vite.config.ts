@@ -14,10 +14,9 @@ export default defineConfig({
     // Tailwind CSSのクラスをCSSに変換するプラグイン
     tailwindcss(),
   ],
-  // 開発サーバーの設定（本番では使用しない）本番では、Workerが/api/* をHonoに、それ以外をSPAに振り分け
+  // 開発サーバー。API は proxy せず localhost:8800 を直接呼ぶ（本番と同じ別オリジン）
   server: {
     port: 5300,
     strictPort: true,
-    proxy: { "/api": "http://localhost:8800" },
   },
 });

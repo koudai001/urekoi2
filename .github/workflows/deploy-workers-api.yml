@@ -1,0 +1,82 @@
+name: Deploy workers-api (production)
+
+on:
+  push:
+    branches:
+      - main # 本番環境
+    paths:
+      - "apps/workers-api/**"
+      - "packages/**"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/deploy-workers-api.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: deploy-workers-api-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # DB を先に変えてから新しいコードを出す。途中で止めないよう直列にする
+  migrate:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: db-migration-${{ github.ref }}
+      cancel-in-progress: false
+    environment:
+      name: production
+    defaults:
+      run:
+        working-directory: apps/workers-api
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mise.toml の node と pnpm の版を入れる
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Apply DB migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_AUTH_TOKEN: ${{ secrets.DATABASE_AUTH_TOKEN }}
+        run: |
+          set -Eeuo pipefail
+          pnpm run db:migrate
+
+  deploy:
+    needs: migrate
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    defaults:
+      run:
+        working-directory: apps/workers-api
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mise.toml の node と pnpm の版を入れる
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Deploy to Cloudflare Workers
+        run: |
+          set -Eeuo pipefail
+          pnpm exec wrangler deploy

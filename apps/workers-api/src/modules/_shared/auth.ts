@@ -23,9 +23,10 @@ export function createAuth({ config, db, emailConfig }: AuthDeps) {
       provider: "sqlite",
       schema: schema,
     }),
-    baseURL: config.appUrl,
+    baseURL: config.betterAuthUrl,
     secret: config.betterAuthSecret,
     trustedOrigins: [
+      config.webUrl,
       "mobileapp://",
       ...(process.env.NODE_ENV === "development" ? ["exp://"] : []),
     ],

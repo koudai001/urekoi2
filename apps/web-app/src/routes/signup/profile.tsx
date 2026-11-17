@@ -1,12 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import {
   type ProfileFormValues,
   profileSchema,
-} from "../../components/signup/profile/profile-schema";
+} from "@urekoi/core/domain/profile";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { SignupBirthday } from "../../components/signup/profile/SignupBirthday";
 import { SignupConfirm } from "../../components/signup/profile/SignupConfirm";
 import { SignupGender } from "../../components/signup/profile/SignupGender";

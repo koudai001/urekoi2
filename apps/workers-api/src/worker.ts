@@ -17,7 +17,7 @@ function getApp(env: WorkerEnv): AppInstance {
   const db = createDb(config.databaseUrl, config.databaseAuthToken);
   const emailConfig = getEmailConfig(env, { email: env.EMAIL });
   const auth = createAuth({ config, db, emailConfig });
-  cachedApp = createApp({ db, auth });
+  cachedApp = createApp({ config, db, auth });
   return cachedApp;
 }
 
