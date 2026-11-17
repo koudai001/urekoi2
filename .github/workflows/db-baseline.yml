@@ -1,0 +1,41 @@
+name: DB baseline (production)
+
+# push で作った本番 DB に、最初のマイグレーションを適用済みとして記録する。一度使ったら消す
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: db-migration-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    defaults:
+      run:
+        working-directory: apps/workers-api
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mise.toml の node と pnpm の版を入れる
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Record baseline
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_AUTH_TOKEN: ${{ secrets.DATABASE_AUTH_TOKEN }}
+        run: |
+          set -Eeuo pipefail
+          pnpm run db:baseline
