@@ -18,9 +18,9 @@ export interface WorkerEnv {
   SMTP_PORT?: string;
   // 以下は secret（wrangler secret put で入れる）。
   /** Turso の接続 URL。 */
-  TURSO_DATABASE_URL: string;
+  DATABASE_URL: string;
   /** Turso の認証トークン。 */
-  TURSO_AUTH_TOKEN: string;
+  DATABASE_AUTH_TOKEN: string;
   /** better-auth のセッション署名鍵。 */
   BETTER_AUTH_SECRET: string;
 }

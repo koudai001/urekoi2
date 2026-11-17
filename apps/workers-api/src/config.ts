@@ -13,8 +13,8 @@ export interface AppConfig {
 const BindingsSchema = z.object({
   WEB_URL: z.string().min(1),
   BETTER_AUTH_URL: z.string().min(1),
-  TURSO_DATABASE_URL: z.string().min(1),
-  TURSO_AUTH_TOKEN: z.string().min(1),
+  DATABASE_URL: z.string().min(1),
+  DATABASE_AUTH_TOKEN: z.string().min(1),
   BETTER_AUTH_SECRET: z.string().min(1),
 });
 
@@ -23,8 +23,8 @@ export function configFromBindings(env: WorkerEnv): AppConfig {
   return {
     webUrl: parsed.WEB_URL,
     betterAuthUrl: parsed.BETTER_AUTH_URL,
-    databaseUrl: parsed.TURSO_DATABASE_URL,
-    databaseAuthToken: parsed.TURSO_AUTH_TOKEN,
+    databaseUrl: parsed.DATABASE_URL,
+    databaseAuthToken: parsed.DATABASE_AUTH_TOKEN,
     betterAuthSecret: parsed.BETTER_AUTH_SECRET,
   };
 }
@@ -32,8 +32,8 @@ export function configFromBindings(env: WorkerEnv): AppConfig {
 const ProcessEnvSchema = z.object({
   WEB_URL: z.string().default("http://localhost:5300"),
   BETTER_AUTH_URL: z.string().default("http://localhost:8800"),
-  TURSO_DATABASE_URL: z.string().default("file:./local.db"),
-  TURSO_AUTH_TOKEN: z.string().default(""),
+  DATABASE_URL: z.string().default("file:./local.db"),
+  DATABASE_AUTH_TOKEN: z.string().default(""),
   BETTER_AUTH_SECRET: z.string().default("local-dev-secret"),
 });
 
@@ -45,8 +45,8 @@ export function configFromProcessEnv(
   return {
     webUrl: parsed.WEB_URL,
     betterAuthUrl: parsed.BETTER_AUTH_URL,
-    databaseUrl: parsed.TURSO_DATABASE_URL,
-    databaseAuthToken: parsed.TURSO_AUTH_TOKEN,
+    databaseUrl: parsed.DATABASE_URL,
+    databaseAuthToken: parsed.DATABASE_AUTH_TOKEN,
     betterAuthSecret: parsed.BETTER_AUTH_SECRET,
   };
 }
