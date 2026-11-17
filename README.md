@@ -51,8 +51,6 @@ modules/<機能>/                  1機能1ディレクトリ
 - テストごとに一時SQLiteを作り、マイグレーションを適用する。終了後に削除する。
 - `createApp({ config, db, auth })` にテスト用DBを渡し、APIは `c.var.db` を使う。
 
-## WAF（Cloudflare ダッシュボード → urekoi.com → Security → WAF）
+## WAF
 
 - Rate limiting `otp-send-limit`：`api.urekoi.com` の `/api/auth/email-otp*` を同一IP 10秒5回超で Block（OTPメールの大量送信対策）
-- Custom rule：`api.urekoi.com` の `/api/doc*` を Block（本番で API ドキュメントを隠す）
-- Bot Fight Mode：OFF（スマホアプリの API 呼び出しを弾くため）
