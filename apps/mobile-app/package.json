@@ -7,6 +7,7 @@
     "@expo/ui": "~58.0.27",
     "@hookform/resolvers": "^5.9.2",
     "@rn-primitives/checkbox": "^1.5.2",
+    "@rn-primitives/progress": "^1.5.2",
     "@rn-primitives/slot": "^1.5.2",
     "@tanstack/react-query": "^5.106.1",
     "@urekoi/core": "workspace:*",
@@ -28,6 +29,7 @@
     "expo-symbols": "~58.0.4",
     "expo-system-ui": "~58.0.7",
     "expo-web-browser": "~58.0.7",
+    "hono": "^4.13.16",
     "lucide-react-native": "^1.72.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
@@ -48,13 +50,16 @@
   },
   "devDependencies": {
     "@types/react": "~19.3.0",
+    "@urekoi/workers-api": "workspace:*",
     "typescript": "~6.0.3"
   },
   "scripts": {
+    "dev": "expo start",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
     "lint": "biome check app src",
     "lint:fix": "biome check --write app src",
     "ui:add": "sh -c 'pnpm dlx @react-native-reusables/cli@latest add \"$@\" && biome check --write src/shared/ui' --"

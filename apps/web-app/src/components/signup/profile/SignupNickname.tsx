@@ -1,8 +1,11 @@
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
+import * as authLabel from "@urekoi/core/labels/auth";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
+
+const label = authLabel.signup.profile.nickname;
 
 // 表示名(ニックネーム)入力
 export function SignupNickname({
@@ -21,16 +24,16 @@ export function SignupNickname({
       <div className="px-8 pt-6">
         <SignupProgressBar currentStep={4} totalSteps={4} />
 
-        <h1 className="mt-8 text-2xl font-bold">表示名を決めましょう</h1>
+        <h1 className="mt-8 text-2xl font-bold">{label.title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          あとから変更できます
+          {label.description}
         </p>
 
         <div className="mt-8">
           <input
             type="text"
             maxLength={20}
-            placeholder="表示名を入力してください"
+            placeholder={label.placeholder}
             {...register("nickname")}
             className="w-full border-none border-b-2 border-primary bg-transparent px-0.5 pt-1 pb-3 text-[19px] outline-none placeholder:text-muted-foreground"
           />

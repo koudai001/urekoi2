@@ -12,9 +12,11 @@ import { type OtpFormValues, otpSchema } from "../model/otp-schema";
 export function OtpForm({
   submitLabel,
   onSubmit,
+  isSubmitting,
 }: {
   submitLabel: string;
   onSubmit: (otp: string) => void;
+  isSubmitting: boolean;
 }) {
   const {
     control,
@@ -52,10 +54,11 @@ export function OtpForm({
       </View>
 
       <Button
+        disabled={isSubmitting}
         onPress={() => handleSubmit(({ otp }) => onSubmit(otp))()}
         className="h-12 rounded-xl"
       >
-        <Text>{submitLabel}</Text>
+        <Text>{isSubmitting ? authLabel.otp.submitting : submitLabel}</Text>
       </Button>
     </View>
   );

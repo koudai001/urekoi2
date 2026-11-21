@@ -2,6 +2,7 @@ export const email = {
   placeholder: "例）urekoi@example.com",
   invalid: "メールアドレスの形式が正しくありません",
   submit: "コードを送る",
+  submitting: "送信中...",
 };
 
 export const otp = {
@@ -10,6 +11,7 @@ export const otp = {
     `${email} にお送りした6桁のコードを入力してください。`,
   placeholder: "6桁のコード",
   invalid: "6桁の数字を入力してください",
+  submitting: "確認中...",
 };
 
 export const signup = {
@@ -35,6 +37,34 @@ export const signup = {
       title: "あなたの性別は？",
       male: "男性",
       female: "女性",
+    },
+    birthday: {
+      title: "あなたの誕生日は？",
+      note: "女性は30歳以上、男性は35歳以下限定です。一度登録すると誕生日の変更はできません。",
+      yearPlaceholder: "YYYY",
+      monthPlaceholder: "MM",
+      dayPlaceholder: "DD",
+    },
+    location: {
+      title: "どちらにお住まいですか？",
+      description: "地域が近いお相手が探しやすくなります",
+    },
+    nickname: {
+      title: "表示名を決めましょう",
+      description: "あとから変更できます",
+      placeholder: "表示名を入力してください",
+    },
+    confirm: {
+      title: "入力内容を確認してください",
+      nickname: "表示名",
+      gender: "性別",
+      birthday: "生年月日",
+      prefecture: "都道府県",
+      birthdayValue: (year: string, month: string, day: string) =>
+        `${year}年${month}月${day}日`,
+      submit: "始める",
+      submitting: "作成中...",
+      invalid: "入力内容に誤りがあります。",
     },
   },
 };

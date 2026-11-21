@@ -1,10 +1,13 @@
 import { PREFECTURES } from "@urekoi/core";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
+import * as authLabel from "@urekoi/core/labels/auth";
 import { Check } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
+
+const label = authLabel.signup.profile.location;
 
 // 居住都道府県の選択
 export function SignupLocation({
@@ -23,9 +26,9 @@ export function SignupLocation({
       <div className="px-8 pt-6">
         <SignupProgressBar currentStep={3} totalSteps={4} />
 
-        <h1 className="mt-8 text-2xl font-bold">どちらにお住まいですか？</h1>
+        <h1 className="mt-8 text-2xl font-bold">{label.title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          地域が近いお相手が探しやすくなります
+          {label.description}
         </p>
 
         <div className="mt-6 max-h-[260px] overflow-y-auto">

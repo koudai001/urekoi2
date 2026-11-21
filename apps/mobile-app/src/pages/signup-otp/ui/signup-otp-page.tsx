@@ -18,6 +18,7 @@ export function SignupOtpPage() {
       <AppText type="title">{authLabel.otp.title}</AppText>
       <AppText>{authLabel.otp.sentTo(email)}</AppText>
       <OtpForm
+        isSubmitting={verifyOtp.isPending}
         submitLabel={authLabel.signup.otpSubmit}
         onSubmit={(otp) =>
           verifyOtp.mutate(

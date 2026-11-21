@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
+import * as authLabel from "@urekoi/core/labels/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BackHeader } from "../ui/BackHeader";
@@ -80,7 +81,9 @@ function EmailStep({ onSent }: { onSent: (email: string) => void }) {
 
         <div>
           <Button type="submit" disabled={sendOtp.isPending}>
-            {sendOtp.isPending ? "送信中..." : "コードを送る"}
+            {sendOtp.isPending
+              ? authLabel.email.submitting
+              : authLabel.email.submit}
           </Button>
         </div>
       </form>

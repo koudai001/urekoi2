@@ -1,9 +1,12 @@
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
+import * as authLabel from "@urekoi/core/labels/auth";
 import type { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { SignupNextButton } from "./SignupNextButton";
 import { SignupProgressBar } from "./SignupProgressBar";
+
+const label = authLabel.signup.profile.birthday;
 
 // 数字以外を除去し、指定桁数までに切り詰める
 function sanitizeDigits(value: string, maxLength: number) {
@@ -51,10 +54,8 @@ export function SignupBirthday({
       <div className="px-8 pt-6">
         <SignupProgressBar currentStep={2} totalSteps={4} />
 
-        <h1 className="mt-8 text-2xl font-bold">あなたの誕生日は？</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          女性は30歳以上、男性は35歳以下限定です。一度登録すると誕生日の変更はできません。
-        </p>
+        <h1 className="mt-8 text-2xl font-bold">{label.title}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{label.note}</p>
 
         <div className="mt-12 flex items-baseline justify-center gap-2.5">
           <div className="flex flex-col items-center gap-1.5">
@@ -62,7 +63,7 @@ export function SignupBirthday({
               type="text"
               inputMode="numeric"
               maxLength={4}
-              placeholder="YYYY"
+              placeholder={label.yearPlaceholder}
               value={year}
               onChange={handleYearChange}
               className="w-[76px] border-none bg-transparent text-center text-[28px] font-bold outline-none placeholder:text-border"
@@ -75,7 +76,7 @@ export function SignupBirthday({
               type="text"
               inputMode="numeric"
               maxLength={2}
-              placeholder="MM"
+              placeholder={label.monthPlaceholder}
               value={month}
               onChange={handleMonthChange}
               className="w-12 border-none bg-transparent text-center text-[28px] font-bold outline-none placeholder:text-border"
@@ -88,7 +89,7 @@ export function SignupBirthday({
               type="text"
               inputMode="numeric"
               maxLength={2}
-              placeholder="DD"
+              placeholder={label.dayPlaceholder}
               value={day}
               onChange={handleDayChange}
               className="w-12 border-none bg-transparent text-center text-[28px] font-bold outline-none placeholder:text-border"
