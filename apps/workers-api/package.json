@@ -10,7 +10,6 @@
     "deploy": "wrangler deploy",
     "test": "vitest run",
     "db:migrate": "drizzle-kit migrate",
-    "db:baseline": "tsx scripts/db-baseline.ts",
     "db:push": "drizzle-kit push",
     "db:push:test": "drizzle-kit push --config drizzle.test.config.ts",
     "db:seed": "tsx src/db/seed.ts",

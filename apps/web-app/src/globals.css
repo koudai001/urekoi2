@@ -1,9 +1,8 @@
-@import "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap";
 @import "tailwindcss";
 @import "@urekoi/core/theme.css";
 
 @theme {
-  --font-sans: "Noto Sans JP", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
 @layer base {
