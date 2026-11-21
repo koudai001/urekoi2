@@ -9,7 +9,13 @@ import { Text } from "@/shared/ui/text";
 import { type EmailFormValues, emailSchema } from "../model/email-schema";
 
 // メールアドレスを入力して、送信ボタンで親に渡す
-export function EmailForm({ onSubmit }: { onSubmit: (email: string) => void }) {
+export function EmailForm({
+  onSubmit,
+  isSubmitting,
+}: {
+  onSubmit: (email: string) => void;
+  isSubmitting: boolean;
+}) {
   const {
     control,
     handleSubmit,
@@ -45,10 +51,13 @@ export function EmailForm({ onSubmit }: { onSubmit: (email: string) => void }) {
       </View>
 
       <Button
+        disabled={isSubmitting}
         onPress={() => handleSubmit(({ email }) => onSubmit(email))()}
         className="h-12 rounded-xl"
       >
-        <Text>{authLabel.email.submit}</Text>
+        <Text>
+          {isSubmitting ? authLabel.email.submitting : authLabel.email.submit}
+        </Text>
       </Button>
     </View>
   );

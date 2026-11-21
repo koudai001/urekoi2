@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as authLabel from "@urekoi/core/labels/auth";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
@@ -58,7 +59,7 @@ export function OtpStep({
 
         <div>
           <Button type="submit" disabled={login.isPending}>
-            {login.isPending ? "送信中..." : submitLabel}
+            {login.isPending ? authLabel.otp.submitting : submitLabel}
           </Button>
         </div>
       </form>

@@ -4,7 +4,6 @@
   "types": "./src/worker.ts",
   "scripts": {
     "dev": "wrangler dev",
-    "mailpit": "pnpm --filter @urekoi/email mailpit",
     "typecheck": "tsc",
     "lint": "biome check src",
     "lint:fix": "biome check --write src",

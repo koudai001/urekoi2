@@ -20,11 +20,12 @@ export function LoginOtpPage() {
       <AppText type="title">{authLabel.otp.title}</AppText>
       <AppText>{authLabel.otp.sentTo(email)}</AppText>
       <OtpForm
+        isSubmitting={verifyOtp.isPending}
         submitLabel={authLabel.login.otpSubmit}
         onSubmit={(otp) =>
           verifyOtp.mutate(
             { email, otp },
-            { onSuccess: () => router.replace("/search") },
+            { onSuccess: () => router.replace("/") },
           )
         }
       />

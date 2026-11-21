@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import * as authLabel from "@urekoi/core/labels/auth";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { OtpStep } from "../login/OtpStep";
@@ -81,7 +82,9 @@ function EmailStep({ onSent }: { onSent: (email: string) => void }) {
 
         <div className="mt-8">
           <Button type="submit" disabled={sendOtp.isPending}>
-            {sendOtp.isPending ? "送信中..." : "コードを送る"}
+            {sendOtp.isPending
+              ? authLabel.email.submitting
+              : authLabel.email.submit}
           </Button>
         </div>
       </form>

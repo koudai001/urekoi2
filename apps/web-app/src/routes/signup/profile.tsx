@@ -13,7 +13,7 @@ import { SignupGender } from "../../components/signup/profile/SignupGender";
 import { SignupIntro } from "../../components/signup/profile/SignupIntro";
 import { SignupLocation } from "../../components/signup/profile/SignupLocation";
 import { SignupNickname } from "../../components/signup/profile/SignupNickname";
-import { apiClient, SERVER_ERROR_MESSAGE } from "../../lib/api-client";
+import { useCreateProfile } from "../../features/create-profile";
 import { queryKeys } from "../../lib/queries";
 
 export const Route = createFileRoute("/signup/profile")({
@@ -39,45 +39,18 @@ function SignupProfile() {
     },
   });
   const [step, setStep] = useState<Step>("intro");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const createProfile = useCreateProfile();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const handleCreateProfile = async () => {
-    setIsSubmitting(true);
-    setErrorMessage(null);
-    const values = form.getValues();
-
-    const res = await apiClient.api.myprofile.$post({
-      json: {
-        nickname: values.nickname,
-        gender: values.gender!,
-        birthdate: `${values.birthYear}-${values.birthMonth.padStart(2, "0")}-${values.birthDay.padStart(2, "0")}`,
-        prefectureCode: values.prefectureCode!,
+  const handleCreateProfile = form.handleSubmit((values) => {
+    createProfile.mutate(values, {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey: queryKeys.myprofile });
+        navigate({ to: "/search" });
       },
     });
-
-    if (!res.ok) {
-      setIsSubmitting(false);
-      switch (res.status) {
-        case 400:
-          setErrorMessage("入力内容に誤りがあります。");
-          break;
-        case 500:
-          setErrorMessage(SERVER_ERROR_MESSAGE);
-          break;
-        default: {
-          // exhaustive check
-          const _exhaustiveCheck: never = res;
-          throw new Error(`Unexpected status code: ${_exhaustiveCheck}`);
-        }
-      }
-      return;
-    }
-    await queryClient.invalidateQueries({ queryKey: queryKeys.myprofile });
-    navigate({ to: "/search" });
-  };
+  });
 
   return (
     <FormProvider {...form}>
@@ -107,9 +80,9 @@ function SignupProfile() {
         ) : (
           <SignupConfirm
             onBack={() => setStep("nickname")}
-            onNext={handleCreateProfile}
-            isSubmitting={isSubmitting}
-            errorMessage={errorMessage}
+            onNext={() => handleCreateProfile()}
+            isSubmitting={createProfile.isPending}
+            apiErrorMessage={createProfile.error?.message ?? null}
           />
         )}
       </main>

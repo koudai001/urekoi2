@@ -19,6 +19,7 @@ export function SignupEmailPage() {
         {authLabel.signup.emailTermsNotice}
       </AppText>
       <EmailForm
+        isSubmitting={sendOtp.isPending}
         onSubmit={(email) =>
           sendOtp.mutate(email, {
             onSuccess: () =>

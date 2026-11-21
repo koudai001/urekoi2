@@ -1,27 +1,30 @@
 import { PREFECTURES } from "@urekoi/core";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
-import { useFormContext } from "react-hook-form";
+import * as authLabel from "@urekoi/core/labels/auth";
+import { useFormContext, useFormState } from "react-hook-form";
 import { BackHeader } from "../../ui/BackHeader";
 import { Button } from "../../ui/Button";
 
-const GENDER_LABEL: Record<string, string> = {
-  male: "男性",
-  female: "女性",
-};
+const label = authLabel.signup.profile.confirm;
+const genderLabel = authLabel.signup.profile.gender;
 
 // signupフローの最終ステップ。入力済みのプロフィール項目を確認し、始めるとプロフィールを作成する
 export function SignupConfirm({
   onBack,
   onNext,
   isSubmitting,
-  errorMessage,
+  apiErrorMessage,
 }: {
   onBack: () => void;
   onNext: () => void;
   isSubmitting: boolean;
-  errorMessage: string | null;
+  apiErrorMessage: string | null;
 }) {
-  const { watch } = useFormContext<ProfileFormValues>();
+  const { watch, control } = useFormContext<ProfileFormValues>();
+  const { errors } = useFormState({ control });
+  const validationErrorMessages = Object.values(errors).map(
+    (error) => error?.message,
+  );
   const nickname = watch("nickname");
   const gender = watch("gender");
   const birthYear = watch("birthYear");
@@ -37,38 +40,47 @@ export function SignupConfirm({
     <>
       <BackHeader onBack={onBack} />
       <div className="px-8 pt-6">
-        <h1 className="text-2xl font-bold">入力内容を確認してください</h1>
+        <h1 className="text-2xl font-bold">{label.title}</h1>
 
         <dl className="mt-8 flex flex-col gap-5">
           <div className="flex items-center justify-between border-b border-border pb-3">
-            <dt className="text-sm text-muted-foreground">表示名</dt>
+            <dt className="text-sm text-muted-foreground">{label.nickname}</dt>
             <dd className="text-base font-bold">{nickname}</dd>
           </div>
           <div className="flex items-center justify-between border-b border-border pb-3">
-            <dt className="text-sm text-muted-foreground">性別</dt>
+            <dt className="text-sm text-muted-foreground">{label.gender}</dt>
             <dd className="text-base font-bold">
-              {gender ? GENDER_LABEL[gender] : ""}
+              {gender ? genderLabel[gender] : ""}
             </dd>
           </div>
           <div className="flex items-center justify-between border-b border-border pb-3">
-            <dt className="text-sm text-muted-foreground">生年月日</dt>
+            <dt className="text-sm text-muted-foreground">{label.birthday}</dt>
             <dd className="text-base font-bold">
-              {birthYear}年{birthMonth}月{birthDay}日
+              {label.birthdayValue(birthYear, birthMonth, birthDay)}
             </dd>
           </div>
           <div className="flex items-center justify-between border-b border-border pb-3">
-            <dt className="text-sm text-muted-foreground">都道府県</dt>
+            <dt className="text-sm text-muted-foreground">
+              {label.prefecture}
+            </dt>
             <dd className="text-base font-bold">{prefectureName}</dd>
           </div>
         </dl>
 
-        {errorMessage && (
-          <p className="mt-4 text-sm font-medium text-error">{errorMessage}</p>
+        {validationErrorMessages.map((message) => (
+          <p key={message} className="mt-4 text-sm font-medium text-error">
+            {message}
+          </p>
+        ))}
+        {apiErrorMessage && (
+          <p className="mt-4 text-sm font-medium text-error">
+            {apiErrorMessage}
+          </p>
         )}
 
         <div className="mt-8">
           <Button type="button" disabled={isSubmitting} onClick={onNext}>
-            {isSubmitting ? "作成中..." : "始める"}
+            {isSubmitting ? label.submitting : label.submit}
           </Button>
         </div>
       </div>

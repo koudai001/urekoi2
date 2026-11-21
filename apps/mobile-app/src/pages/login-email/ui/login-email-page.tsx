@@ -18,6 +18,7 @@ export function LoginEmailPage() {
       />
       <AppText type="title">{authLabel.login.emailTitle}</AppText>
       <EmailForm
+        isSubmitting={sendOtp.isPending}
         onSubmit={(email) =>
           sendOtp.mutate(email, {
             onSuccess: () =>

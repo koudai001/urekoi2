@@ -3,8 +3,9 @@ import { z } from "zod";
 // 女性は30歳以上・男性は35歳以下(熟恋のコンセプト上の年齢制限。BE側でも同じルールを予定)
 const MIN_AGE_FEMALE = 30;
 const MAX_AGE_MALE = 35;
-const MIN_AGE = 18;
-const MAX_AGE = 100; // 現実的にあり得ない生年月日(1111年など)を弾くための上限
+export const MIN_AGE = 18;
+export const MAX_AGE = 100; // 現実的にあり得ない生年月日(1111年など)を弾くための上限
+export const MAX_NICKNAME_LENGTH = 20;
 
 function calculateAge(
   year: number,
@@ -113,7 +114,7 @@ export const profileSchema = z
         message: "表示名を入力してください",
         path: ["nickname"],
       });
-    } else if (trimmedNickname.length > 20) {
+    } else if (trimmedNickname.length > MAX_NICKNAME_LENGTH) {
       ctx.addIssue({
         code: "custom",
         message: "表示名は20文字以内で入力してください",

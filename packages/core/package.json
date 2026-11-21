@@ -12,10 +12,14 @@
     "./theme.css": "./src/theme.css"
   },
   "scripts": {
+    "typecheck": "tsc",
     "lint": "biome check src",
     "lint:fix": "biome check --write src"
   },
   "dependencies": {
     "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }
