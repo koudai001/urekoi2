@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "nodemailer": "^10.1.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-email": "^6.11.1",
     "zod": "^4.6.5"
   },

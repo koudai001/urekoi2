@@ -1,0 +1,38 @@
+name: Deploy mobile-app (TestFlight)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-mobile-app
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    defaults:
+      run:
+        working-directory: apps/mobile-app
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # mise.toml の node・pnpm・eas-cli の版を入れる
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      # EAS のクラウドでビルドし、終わったら TestFlight に提出する
+      - name: Build and submit (iOS)
+        run: eas build -p ios --profile production --non-interactive --auto-submit --no-wait

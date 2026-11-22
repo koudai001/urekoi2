@@ -10,6 +10,10 @@ allowBuilds:
 packages:
   - "apps/*"
   - "packages/*"
+# Expo SDK が求める版に揃える
+catalog:
+  react: 19.3.0
+  react-dom: 19.3.0
 peerDependencyRules:
   allowedVersions:
     drizzle-orm>@sinclair/typebox: "*"
