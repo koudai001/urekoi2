@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import * as authLabel from "@urekoi/core/labels/auth";
 import * as commonLabel from "@urekoi/core/labels/common";
-import { apiClient } from "../../../lib/api-client";
+import { apiClient } from "../../../shared/api/api-client";
 
 // フォームの値を API の形に変えて、プロフィールを作成する
 export function useCreateProfile() {

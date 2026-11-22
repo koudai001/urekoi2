@@ -48,3 +48,8 @@ export const PREFECTURES = [
   { code: 46, name: "鹿児島" },
   { code: 47, name: "沖縄" },
 ] as const;
+
+// 都道府県コードから名前を引く。見つからなければ空文字
+export function getPrefectureName(code: number | undefined): string {
+  return PREFECTURES.find((p) => p.code === code)?.name ?? "";
+}

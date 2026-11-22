@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import * as logger from "@urekoi/logger";
 import { z } from "zod";
-import { authClient } from "../../lib/auth-client";
+import { authClient } from "../../shared/api/auth-client";
 
 export const emailSchema = z.object({
   email: z.email("メールアドレスの形式が正しくありません"),

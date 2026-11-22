@@ -15,8 +15,11 @@ export function BottomBar() {
   });
 
   return (
-    <nav aria-label="メインナビゲーション" className="px-3 pb-3 pt-2">
-      <div className="mx-auto flex h-16 max-w-lg items-center justify-around rounded-2xl border border-border shadow-lg">
+    <nav
+      aria-label="メインナビゲーション"
+      className="bg-background px-3 pb-3 pt-2"
+    >
+      <div className="mx-auto flex h-16 max-w-lg items-center justify-around rounded-2xl border border-border bg-background shadow-lg">
         {navigationItems.map(({ to, label, icon: Icon }) => {
           const active = pathname.startsWith(to);
 

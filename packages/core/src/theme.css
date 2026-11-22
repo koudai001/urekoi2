@@ -1,5 +1,5 @@
 @theme {
-  --color-background: oklch(0.98 0.01 80);
+  --color-background: oklch(1 0 0);
   --color-foreground: oklch(0.2 0.02 330);
   --color-primary: oklch(0.6 0.2 338);
   --color-primary-foreground: oklch(1 0 0);

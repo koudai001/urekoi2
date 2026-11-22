@@ -1,4 +1,4 @@
-import { PREFECTURES } from "@urekoi/core";
+import { getPrefectureName } from "@urekoi/core";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import * as authLabel from "@urekoi/core/labels/auth";
 import { useFormContext, useFormState } from "react-hook-form";
@@ -32,9 +32,7 @@ export function SignupConfirm({
   const birthDay = watch("birthDay");
   const prefectureCode = watch("prefectureCode");
 
-  const prefectureName = PREFECTURES.find(
-    (p) => p.code === prefectureCode,
-  )?.name;
+  const prefectureName = getPrefectureName(prefectureCode);
 
   return (
     <>

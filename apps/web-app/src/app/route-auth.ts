@@ -1,8 +1,8 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { redirect } from "@tanstack/react-router";
-import { authClient } from "./auth-client";
-import { fetchMyProfile } from "./myprofile";
-import { queryKeys } from "./queries";
+import { fetchMyProfile } from "../entities/profile";
+import { authClient } from "../shared/api/auth-client";
+import { queryKeys } from "../shared/api/query-keys";
 
 // _app.beforeLoad 用の認証ガード
 // 未ログインなら /、プロフィール未作成なら /signup/profile へ
