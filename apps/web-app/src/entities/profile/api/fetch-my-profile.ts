@@ -1,4 +1,4 @@
-import { apiClient } from "./api-client";
+import { apiClient } from "../../../shared/api/api-client";
 
 // プロフィール未作成（404）なら null を返す
 export async function fetchMyProfile() {

@@ -25,7 +25,7 @@ export function LoginOtpPage() {
         onSubmit={(otp) =>
           verifyOtp.mutate(
             { email, otp },
-            { onSuccess: () => router.replace("/") },
+            { onSuccess: () => router.replace("/search") },
           )
         }
       />

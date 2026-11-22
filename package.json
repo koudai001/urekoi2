@@ -4,6 +4,7 @@
   "packageManager": "pnpm@12.18.0",
   "scripts": {
     "dev": "turbo dev",
+    "dev:kill-ports": "./scripts/kill-dev-ports.sh",
     "typecheck": "turbo typecheck",
     "build": "turbo build",
     "lint": "turbo lint",

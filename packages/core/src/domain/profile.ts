@@ -7,7 +7,7 @@ export const MIN_AGE = 18;
 export const MAX_AGE = 100; // 現実的にあり得ない生年月日(1111年など)を弾くための上限
 export const MAX_NICKNAME_LENGTH = 20;
 
-function calculateAge(
+export function calculateAge(
   year: number,
   month: number,
   day: number,

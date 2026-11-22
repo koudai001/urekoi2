@@ -1,4 +1,4 @@
-import { PREFECTURES } from "@urekoi/core";
+import { getPrefectureName } from "@urekoi/core";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import * as authLabel from "@urekoi/core/labels/auth";
 import { router, Stack } from "expo-router";
@@ -31,12 +31,11 @@ export function SignupProfileConfirmPage() {
   );
   const createProfile = useCreateProfile();
   const apiErrorMessage = createProfile.error?.message;
-  const prefectureName =
-    PREFECTURES.find((p) => p.code === values.prefectureCode)?.name ?? "";
+  const prefectureName = getPrefectureName(values.prefectureCode);
 
   const onSubmit = handleSubmit((formValues) => {
     createProfile.mutate(formValues, {
-      onSuccess: () => router.replace("/"),
+      onSuccess: () => router.replace("/search"),
     });
   });
 

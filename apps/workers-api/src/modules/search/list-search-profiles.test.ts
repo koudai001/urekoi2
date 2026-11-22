@@ -81,6 +81,25 @@ describe("GET /api/search", () => {
     expect(secondBody.profiles.map((p) => p.userId)).toEqual([olderId]);
   });
 
+  it("最後のページ → nextCursor が null", async () => {
+    const res = await client.api.search.$get({ query: { limit: "2" } });
+    if (res.status !== 200) {
+      throw new Error(`Expected 200, received ${res.status}`);
+    }
+    const body = await res.json();
+    expect(body.profiles).toHaveLength(2);
+    expect(body.nextCursor).toBeNull();
+  });
+
+  it("limit を指定 → その件数だけ返す", async () => {
+    const res = await client.api.search.$get({ query: { limit: "1" } });
+    if (res.status !== 200) {
+      throw new Error(`Expected 200, received ${res.status}`);
+    }
+    const body = await res.json();
+    expect(body.profiles).toHaveLength(1);
+  });
+
   it("不正な cursor → 400", async () => {
     const res = await client.api.search.$get({
       query: { cursor: "invalid" },

@@ -1,13 +1,13 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { BottomBar } from "../components/ui/BottomBar";
-import { requireProfiledSession } from "../lib/app-route-auth";
+import { requireProfiledSession } from "../app/route-auth";
+import { BottomBar } from "../widgets/bottom-bar";
 
 // 探す・いいね・メッセージ・マイページ共通のレイアウト。下部にタブナビゲーションを表示する
 export const Route = createFileRoute("/_app")({
   beforeLoad: ({ context }) => requireProfiledSession(context.queryClient),
   component: () => (
-    <div className="flex min-h-svh flex-col">
-      <div className="flex-1">
+    <div className="flex h-svh flex-col">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         <Outlet />
       </div>
       <BottomBar />

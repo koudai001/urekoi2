@@ -14,7 +14,7 @@ import { SignupIntro } from "../../components/signup/profile/SignupIntro";
 import { SignupLocation } from "../../components/signup/profile/SignupLocation";
 import { SignupNickname } from "../../components/signup/profile/SignupNickname";
 import { useCreateProfile } from "../../features/create-profile";
-import { queryKeys } from "../../lib/queries";
+import { queryKeys } from "../../shared/api/query-keys";
 
 export const Route = createFileRoute("/signup/profile")({
   component: SignupProfile,
