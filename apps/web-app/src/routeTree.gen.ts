@@ -18,6 +18,7 @@ import { Route as SignupProfileRouteImport } from './routes/signup/profile'
 import { Route as AppMessagesIndexRouteImport } from './routes/_app/messages/index'
 import { Route as AppMyprofileIndexRouteImport } from './routes/_app/myprofile/index'
 import { Route as AppSearchIndexRouteImport } from './routes/_app/search/index'
+import { Route as AppSearchIdRouteImport } from './routes/_app/search/$id'
 import { Route as AppLikesPendingIndexRouteImport } from './routes/_app/likes/pending/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -64,6 +65,11 @@ const AppSearchIndexRoute = AppSearchIndexRouteImport.update({
   path: '/search/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSearchIdRoute = AppSearchIdRouteImport.update({
+  id: '/search/$id',
+  path: '/search/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppLikesPendingIndexRoute = AppLikesPendingIndexRouteImport.update({
   id: '/likes/pending/',
   path: '/likes/pending/',
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRouteWithChildren
   '/signup/profile': typeof SignupProfileRoute
   '/signup/': typeof SignupIndexRoute
+  '/search/$id': typeof AppSearchIdRoute
   '/messages/': typeof AppMessagesIndexRoute
   '/myprofile/': typeof AppMyprofileIndexRoute
   '/search/': typeof AppSearchIndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/signup/profile': typeof SignupProfileRoute
   '/signup': typeof SignupIndexRoute
+  '/search/$id': typeof AppSearchIdRoute
   '/messages': typeof AppMessagesIndexRoute
   '/myprofile': typeof AppMyprofileIndexRoute
   '/search': typeof AppSearchIndexRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRouteWithChildren
   '/signup/profile': typeof SignupProfileRoute
   '/signup/': typeof SignupIndexRoute
+  '/_app/search/$id': typeof AppSearchIdRoute
   '/_app/messages/': typeof AppMessagesIndexRoute
   '/_app/myprofile/': typeof AppMyprofileIndexRoute
   '/_app/search/': typeof AppSearchIndexRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/signup/profile'
     | '/signup/'
+    | '/search/$id'
     | '/messages/'
     | '/myprofile/'
     | '/search/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup/profile'
     | '/signup'
+    | '/search/$id'
     | '/messages'
     | '/myprofile'
     | '/search'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/signup/profile'
     | '/signup/'
+    | '/_app/search/$id'
     | '/_app/messages/'
     | '/_app/myprofile/'
     | '/_app/search/'
@@ -212,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSearchIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/search/$id': {
+      id: '/_app/search/$id'
+      path: '/search/$id'
+      fullPath: '/search/$id'
+      preLoaderRoute: typeof AppSearchIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/likes/pending/': {
       id: '/_app/likes/pending/'
       path: '/likes/pending'
@@ -223,6 +242,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppSearchIdRoute: typeof AppSearchIdRoute
   AppMessagesIndexRoute: typeof AppMessagesIndexRoute
   AppMyprofileIndexRoute: typeof AppMyprofileIndexRoute
   AppSearchIndexRoute: typeof AppSearchIndexRoute
@@ -230,6 +250,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppSearchIdRoute: AppSearchIdRoute,
   AppMessagesIndexRoute: AppMessagesIndexRoute,
   AppMyprofileIndexRoute: AppMyprofileIndexRoute,
   AppSearchIndexRoute: AppSearchIndexRoute,
