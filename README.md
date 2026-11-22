@@ -70,6 +70,7 @@ if (!res.ok) {
 - Node環境で実行する。
 - テストごとに一時SQLiteを作り、マイグレーションを適用する。終了後に削除する。
 - `createApp({ config, db, auth })` にテスト用DBを渡し、APIは `c.var.db` を使う。
+- 認証は `createTestAuth()` を差し込み、`authHeaders(userId)` でユーザーを指定する。
 
 ## WAF
 

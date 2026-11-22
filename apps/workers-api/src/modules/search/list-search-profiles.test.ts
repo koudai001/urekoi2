@@ -1,16 +1,10 @@
 import { testClient } from "hono/testing";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import type { AppType } from "../../app";
 import { profile, user } from "../../db/schema";
 import { createTestApp } from "../../test/test-app";
+import { authHeaders } from "../../test/test-auth";
 import type { TestDb } from "../../test/test-db";
-import { setCurrentUserId } from "../_shared/require-auth.mock";
-
-// ミドルウェアのモック
-vi.mock(
-  "../_shared/require-auth",
-  () => import("../_shared/require-auth.mock"),
-);
 
 // ユーザーとプロフィールを DB に直接作る（作った順に新しくなる）
 async function createUserWithProfile(
@@ -38,14 +32,15 @@ let myId: string;
 let olderId: string;
 let newerId: string;
 
-// テストごとに空の DB を作り、自分 → 相手A → 相手B の順に作る
+// テストごとに空の DB を作り、自分 → 相手A → 相手B の順に作って、自分として呼ぶクライアントを用意する
 beforeEach(async () => {
   const { app, db } = await createTestApp();
-  client = testClient(app);
   myId = await createUserWithProfile(db, "自分");
   olderId = await createUserWithProfile(db, "相手A");
   newerId = await createUserWithProfile(db, "相手B");
-  setCurrentUserId(myId);
+  client = testClient(app, undefined, undefined, {
+    headers: authHeaders(myId),
+  });
 });
 
 describe("GET /api/search", () => {

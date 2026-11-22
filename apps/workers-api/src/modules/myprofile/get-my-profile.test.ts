@@ -1,33 +1,35 @@
 import { testClient } from "hono/testing";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import type { AppType } from "../../app";
 import { user } from "../../db/schema";
 import { createTestApp } from "../../test/test-app";
-import { setCurrentUserId } from "../_shared/require-auth.mock";
-
-// ミドルウェアのモック
-vi.mock(
-  "../_shared/require-auth",
-  () => import("../_shared/require-auth.mock"),
-);
+import { authHeaders } from "../../test/test-auth";
 
 let client: ReturnType<typeof testClient<AppType>>;
+let guestClient: ReturnType<typeof testClient<AppType>>;
 let userId: string;
 
-// テストごとに空の DB を作り、user を作ってモックにセットする
+// テストごとに空の DB を作り、user を作ってその user として呼ぶクライアントを用意する
 beforeEach(async () => {
   const { app, db } = await createTestApp();
-  client = testClient(app);
   userId = crypto.randomUUID();
   await db.insert(user).values({
     id: userId,
     name: "テストユーザー",
     email: `test-${userId}@test.example.com`,
   });
-  setCurrentUserId(userId);
+  client = testClient(app, undefined, undefined, {
+    headers: authHeaders(userId),
+  });
+  guestClient = testClient(app);
 });
 
 describe("GET /api/myprofile", () => {
+  it("未ログイン → 401", async () => {
+    const res = await guestClient.api.myprofile.$get();
+    expect(res.status).toBe(401);
+  });
+
   it("プロフィール未作成 → 404", async () => {
     const res = await client.api.myprofile.$get();
     expect(res.status).toBe(404);
