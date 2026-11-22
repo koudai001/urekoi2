@@ -10,7 +10,7 @@ export const authClient = createAuthClient({
   fetchOptions: { customFetchImpl: fetchWithTimeout },
   plugins: [
     expoClient({
-      scheme: "mobileapp",
+      scheme: "urekoi",
       storagePrefix: "urekoi",
       storage: SecureStore,
     }),

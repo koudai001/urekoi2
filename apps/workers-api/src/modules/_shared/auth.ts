@@ -27,7 +27,7 @@ export function createAuth({ config, db, emailConfig }: AuthDeps) {
     secret: config.betterAuthSecret,
     trustedOrigins: [
       config.webUrl,
-      "mobileapp://",
+      "urekoi://",
       ...(process.env.NODE_ENV === "development" ? ["exp://"] : []),
     ],
     plugins: [
