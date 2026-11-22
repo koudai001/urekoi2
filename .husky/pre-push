@@ -1,0 +1,1 @@
+mise exec -- pnpm --filter @urekoi/workers-api test
