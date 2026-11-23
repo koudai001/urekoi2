@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@playwright/test": "^1.53.0",
+    "@playwright/test": "^1.65.1",
     "dotenv": "^16.5.0",
     "tsx": "^4.19.4",
     "typescript": "^7.0.2",
