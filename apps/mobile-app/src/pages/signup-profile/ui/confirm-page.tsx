@@ -1,7 +1,7 @@
 import { getPrefectureName } from "@urekoi/core";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import * as authLabel from "@urekoi/core/labels/auth";
-import { router, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 import { useCreateProfile } from "@/features/create-profile";
@@ -34,9 +34,7 @@ export function SignupProfileConfirmPage() {
   const prefectureName = getPrefectureName(values.prefectureCode);
 
   const onSubmit = handleSubmit((formValues) => {
-    createProfile.mutate(formValues, {
-      onSuccess: () => router.replace("/search"),
-    });
+    createProfile.mutate(formValues);
   });
 
   return (

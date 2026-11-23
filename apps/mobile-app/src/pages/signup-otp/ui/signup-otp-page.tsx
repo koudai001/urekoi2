@@ -1,5 +1,5 @@
 import * as authLabel from "@urekoi/core/labels/auth";
-import { router, Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native";
 import { OtpForm, useVerifyOtp } from "@/features/auth-by-email";
 import { AppText } from "@/shared/ui/app-text";
@@ -20,12 +20,7 @@ export function SignupOtpPage() {
       <OtpForm
         isSubmitting={verifyOtp.isPending}
         submitLabel={authLabel.signup.otpSubmit}
-        onSubmit={(otp) =>
-          verifyOtp.mutate(
-            { email, otp },
-            { onSuccess: () => router.replace("/signup/profile") },
-          )
-        }
+        onSubmit={(otp) => verifyOtp.mutate({ email, otp })}
       />
       {verifyOtp.isError && (
         <AppText className="text-sm font-medium text-error">

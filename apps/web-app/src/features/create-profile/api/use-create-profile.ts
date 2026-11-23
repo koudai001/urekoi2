@@ -22,11 +22,17 @@ export function useCreateProfile() {
         },
       });
       if (!res.ok) {
-        throw new Error(
-          res.status === 400
-            ? authLabel.signup.profile.confirm.invalid
-            : commonLabel.serverError,
-        );
+        switch (res.status) {
+          case 400:
+            throw new Error(authLabel.signup.profile.confirm.invalid);
+          case 500:
+            throw new Error(commonLabel.serverError);
+          default: {
+            // 想定していないステータスが増えたら、型エラーで気づけるようにする
+            const _exhaustiveCheck: never = res;
+            throw new Error(`Unexpected status code: ${_exhaustiveCheck}`);
+          }
+        }
       }
     },
   });

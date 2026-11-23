@@ -6,6 +6,7 @@ import type { Db } from "./db";
 import type { Auth } from "./modules/_shared/auth";
 import type { AppEnv } from "./modules/_shared/context";
 import { myprofileRoutes } from "./modules/myprofile/myprofile.routes";
+import { profilesRoutes } from "./modules/profiles/profiles.routes";
 import { searchRoutes } from "./modules/search/search.routes";
 
 interface AppDeps {
@@ -28,6 +29,7 @@ export function createApp({ config, db, auth }: AppDeps) {
   const routes = api
     .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
     .route("/myprofile", myprofileRoutes())
+    .route("/profiles", profilesRoutes())
     .route("/search", searchRoutes());
 
   api.doc("/doc", {

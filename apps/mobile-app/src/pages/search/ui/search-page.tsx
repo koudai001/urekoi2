@@ -1,5 +1,6 @@
 import * as commonLabel from "@urekoi/core/labels/common";
-import { FlatList, View } from "react-native";
+import { Link } from "expo-router";
+import { FlatList, Pressable } from "react-native";
 import { ProfileCard, useSearchProfiles } from "@/entities/profile";
 import { AppText } from "@/shared/ui/app-text";
 import { ListEmpty } from "./list-empty";
@@ -33,9 +34,14 @@ export function SearchPage() {
       data={profiles}
       keyExtractor={(profile) => String(profile.id)}
       renderItem={({ item }) => (
-        <View className="flex-1">
-          <ProfileCard profile={item} />
-        </View>
+        <Link
+          href={{ pathname: "/search/[id]", params: { id: item.id } }}
+          asChild
+        >
+          <Pressable className="flex-1">
+            <ProfileCard profile={item} />
+          </Pressable>
+        </Link>
       )}
       numColumns={2}
       columnWrapperClassName="gap-3"

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import * as commonLabel from "@urekoi/core/labels/common";
 import * as searchLabel from "@urekoi/core/labels/search";
 import { useEffect, useRef } from "react";
@@ -39,7 +40,9 @@ export function SearchPage() {
       {profiles.length > 0 ? (
         <div className="grid grid-cols-2 gap-3">
           {profiles.map((profile) => (
-            <ProfileCard key={profile.id} profile={profile} />
+            <Link key={profile.id} to="/search/$id" params={{ id: profile.id }}>
+              <ProfileCard profile={profile} />
+            </Link>
           ))}
         </div>
       ) : (

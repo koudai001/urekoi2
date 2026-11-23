@@ -1,11 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { ProfileFormValues } from "@urekoi/core/domain/profile";
 import * as authLabel from "@urekoi/core/labels/auth";
 import * as commonLabel from "@urekoi/core/labels/common";
 import { apiClient } from "@/shared/api/api-client";
+import { queryKeys } from "@/shared/api/query-keys";
 
 // フォームの値を API の形に変えて、プロフィールを作成する
 export function useCreateProfile() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (values: ProfileFormValues) => {
       const { gender, prefectureCode } = values;
@@ -22,12 +25,21 @@ export function useCreateProfile() {
         },
       });
       if (!res.ok) {
-        throw new Error(
-          res.status === 400
-            ? authLabel.signup.profile.confirm.invalid
-            : commonLabel.serverError,
-        );
+        switch (res.status) {
+          case 400:
+            throw new Error(authLabel.signup.profile.confirm.invalid);
+          case 500:
+            throw new Error(commonLabel.serverError);
+          default: {
+            // 想定していないステータスが増えたら、型エラーで気づけるようにする
+            const _exhaustiveCheck: never = res;
+            throw new Error(`Unexpected status code: ${_exhaustiveCheck}`);
+          }
+        }
       }
     },
+    // 自分のプロフィールを取り直し、ガードを「探す」へ進める
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.myprofile }),
   });
 }

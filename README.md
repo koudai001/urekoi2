@@ -33,6 +33,26 @@ modules/<機能>/                  1機能1ディレクトリ
 - ルート（beforeLoad / loader）で取得 → ページはキャッシュから読む
 - 更新成功時は対象クエリのみ invalidate
 
+## API呼び出しのエラー処理（web-app / mobile-app）
+
+- `res.status` で `switch` し、ステータスごとにラベルのメッセージを投げる（`if (!res.ok) throw` でまとめない）
+- `default` は `never` で網羅チェック（API にステータスが増えたら型エラーで気づく）
+
+```ts
+if (!res.ok) {
+  switch (res.status) {
+    case 400:
+      throw new Error(xxxLabel.invalid);
+    case 500:
+      throw new Error(commonLabel.serverError);
+    default: {
+      const _exhaustiveCheck: never = res;
+      throw new Error(`Unexpected status code: ${_exhaustiveCheck}`);
+    }
+  }
+}
+```
+
 ## 認証
 
 - better-authを使用
@@ -50,6 +70,7 @@ modules/<機能>/                  1機能1ディレクトリ
 - Node環境で実行する。
 - テストごとに一時SQLiteを作り、マイグレーションを適用する。終了後に削除する。
 - `createApp({ config, db, auth })` にテスト用DBを渡し、APIは `c.var.db` を使う。
+- 認証は `createTestAuth()` を差し込み、`authHeaders(userId)` でユーザーを指定する。
 
 ## WAF
 

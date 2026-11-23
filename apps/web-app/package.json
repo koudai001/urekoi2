@@ -9,7 +9,8 @@
     "deploy": "wrangler deploy",
     "typecheck": "tsc",
     "lint": "biome check src",
-    "lint:fix": "biome check --write src"
+    "lint:fix": "biome check --write src",
+    "ui:add": "sh -c 'pnpm dlx shadcn@latest add \"$@\" && biome check --write src/shared/ui' --"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
@@ -19,8 +20,11 @@
     "@urekoi/core": "workspace:*",
     "@urekoi/logger": "workspace:^",
     "better-auth": "^1.7.3",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.5.2",
     "hono": "^4.13.7",
     "lucide-react": "^1.47.0",
+    "radix-ui": "^1.8.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-hook-form": "^7.88.0",
