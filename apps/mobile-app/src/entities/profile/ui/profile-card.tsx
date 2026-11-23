@@ -1,7 +1,4 @@
 import { getPrefectureName } from "@urekoi/core";
-import men1 from "@urekoi/core/assets/profiles/men-1.webp";
-import woman1 from "@urekoi/core/assets/profiles/woman-1.webp";
-import woman3 from "@urekoi/core/assets/profiles/woman-3.webp";
 import { calculateAge } from "@urekoi/core/domain/profile";
 import type { InferResponseType } from "hono/client";
 import { View } from "react-native";
@@ -9,14 +6,12 @@ import type { apiClient } from "@/shared/api/api-client";
 import { AppImage } from "@/shared/ui/app-image";
 import { AppText } from "@/shared/ui/app-text";
 import { Card, CardContent } from "@/shared/ui/card";
+import { getDummyImage } from "../lib/dummy-image";
 
 type SearchProfile = InferResponseType<
   typeof apiClient.api.search.$get,
   200
 >["profiles"][number];
-
-// 写真がまだないので、ID でダミー画像を決める
-const dummyImages = [woman1, woman3, men1];
 
 export function ProfileCard({
   profile,
@@ -26,7 +21,7 @@ export function ProfileCard({
     "id" | "nickname" | "birthdate" | "prefectureCode" | "occupation" | "bio"
   >;
 }) {
-  const image = dummyImages[profile.id % dummyImages.length];
+  const image = getDummyImage(profile.id);
   const [year, month, day] = profile.birthdate.split("-").map(Number);
   const age = calculateAge(year, month, day);
   const prefectureName = getPrefectureName(profile.prefectureCode);
