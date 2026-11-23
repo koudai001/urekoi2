@@ -17,7 +17,11 @@
     // コンパイルはviteが行うので、tscは出力しない
     "noEmit": true,
     // viteの機能の型定義を読み込む
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    // @/ で src からの絶対パスで import できるようにする
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   // 監視対象
   "include": ["src", "vite.config.ts", "../workers-api/worker-configuration.d.ts"]

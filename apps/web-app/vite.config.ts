@@ -14,6 +14,10 @@ export default defineConfig({
     // Tailwind CSSのクラスをCSSに変換するプラグイン
     tailwindcss(),
   ],
+  // tsconfig.json の paths（@/ → src/）を Vite でも使う
+  resolve: {
+    tsconfigPaths: true,
+  },
   // 開発サーバー。API は proxy せず localhost:8800 を直接呼ぶ（本番と同じ別オリジン）
   server: {
     port: 5300,
